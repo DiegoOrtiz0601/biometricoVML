@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\" />
+    <Folder Include="Data\DataBaseRegistro_Test\" />
+    <Folder Include="Data\dbVMLTalentoHumano\" />
+    <Folder Include="Libs\DigitalPersona\" />
+    <Folder Include="Models\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.3" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.3" />
+  </ItemGroup>
+	<ItemGroup>
+		<Reference Include="DPFPDevNET">
+			<HintPath>Libs\DigitalPersona\DPFPDevNET.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="DPFPEngNET">
+			<HintPath>Libs\DigitalPersona\DPFPEngNET.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="DPFPVerNET">
+			<HintPath>Libs\DigitalPersona\DPFPVerNET.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+		<Reference Include="DPFPShrNET">
+			<HintPath>Libs\DigitalPersona\DPFPShrNET.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+	</ItemGroup>
+
+</Project>
