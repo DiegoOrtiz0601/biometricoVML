@@ -6,6 +6,8 @@ using System.Drawing;
 
 namespace BiomentricoHolding.Services
 {
+    public enum ModoCaptura { Registro, Verificacion }
+
     public class CapturaHuellaService : DPFP.Capture.EventHandler
     {
         private Capture Capturador;
@@ -17,8 +19,11 @@ namespace BiomentricoHolding.Services
 
         public event Action<string> Mensaje;
         public event Action<Template> TemplateGenerado;
-        public event Action<Bitmap> MuestraProcesada;
+        public event Action<Bitmap> MuestraProcesadaImagen;
+        public event Action<Sample> MuestraProcesada; // ← muestra cruda para verificación
         public event Action IntentoFallido;
+
+        public ModoCaptura Modo { get; set; } = ModoCaptura.Registro;
 
         public CapturaHuellaService()
         {
@@ -43,11 +48,10 @@ namespace BiomentricoHolding.Services
 
         public void IniciarCaptura()
         {
-           
             try
             {
-                DetenerCaptura(); // Evita múltiples capturas
-                Enroller.Clear(); // Limpia datos anteriores
+                DetenerCaptura(); // evitar múltiples sesiones
+                Enroller.Clear();
                 primerIntento = true;
 
                 Capturador?.StartCapture();
@@ -81,15 +85,23 @@ namespace BiomentricoHolding.Services
                 return;
             }
 
-            var features = ExtractFeatures(sample, DataPurpose.Enrollment);
+            // Mostrar imagen
+            MuestraProcesadaImagen?.Invoke(ConvertirMuestraAImagen(sample));
 
+            // ➤ Si estamos en modo verificación, enviar sample directamente
+            if (Modo == ModoCaptura.Verificacion)
+            {
+                MuestraProcesada?.Invoke(sample); // ← aquí haces comparación en el otro módulo
+                return;
+            }
+
+            // ➤ Si estamos en modo registro, continuar flujo de enrolamiento
+            var features = ExtractFeatures(sample, DataPurpose.Enrollment);
             if (features != null)
             {
                 try
                 {
                     Enroller.AddFeatures(features);
-
-                    MuestraProcesada?.Invoke(ConvertirMuestraAImagen(sample));
                     Mensaje?.Invoke($"✅ Muestra válida. Faltan {Enroller.FeaturesNeeded} muestra(s).");
 
                     if (Enroller.TemplateStatus == Enrollment.Status.Ready)
@@ -132,6 +144,17 @@ namespace BiomentricoHolding.Services
             return imagen;
         }
 
+        private FeatureSet ExtractFeatures(Sample sample, DataPurpose purpose)
+        {
+            var extractor = new FeatureExtraction();
+            CaptureFeedback feedback = CaptureFeedback.None;
+            var features = new FeatureSet();
+
+            extractor.CreateFeatureSet(sample, purpose, ref feedback, ref features);
+
+            return (feedback == CaptureFeedback.Good) ? features : null;
+        }
+
         public void OnFingerTouch(object capture, string readerSerialNumber)
         {
             if (primerIntento)
@@ -164,17 +187,6 @@ namespace BiomentricoHolding.Services
                 Mensaje?.Invoke("👌 Calidad de huella aceptable.");
             else
                 Mensaje?.Invoke("⚠ Calidad de huella insuficiente.");
-        }
-
-        private FeatureSet ExtractFeatures(Sample sample, DataPurpose purpose)
-        {
-            var extractor = new FeatureExtraction();
-            CaptureFeedback feedback = CaptureFeedback.None;
-            var features = new FeatureSet();
-
-            extractor.CreateFeatureSet(sample, purpose, ref feedback, ref features);
-
-            return (feedback == CaptureFeedback.Good) ? features : null;
         }
     }
 }

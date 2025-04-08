@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using BiomentricoHolding.Services;
-using BiomentricoHolding.Views; // Asegúrate de que esté presente
+using BiomentricoHolding.Views;
 using DPFP;
 using System.Drawing;
 
@@ -23,24 +23,26 @@ namespace BiomentricoHolding.Views.Empleado
         {
             InitializeComponent();
 
-            capturaService = new CapturaHuellaService();
-            capturaService.Mensaje += MostrarMensajeTexto; // Solo en label
+            capturaService = new CapturaHuellaService
+            {
+                Modo = ModoCaptura.Registro // 👈 muy importante
+            };
+
+            capturaService.Mensaje += MostrarMensajeTexto;
             capturaService.TemplateGenerado += HuellaCapturada;
-            capturaService.MuestraProcesada += DibujarHuella;
+            capturaService.MuestraProcesadaImagen += DibujarHuella; // 👈 actualizamos este
             capturaService.IntentoFallido += MostrarFalloYReintentar;
 
             capturaService.IniciarCaptura();
         }
 
-        // 👉 Mensaje solo en etiqueta
         private void MostrarMensajeTexto(string mensaje)
         {
             Dispatcher.Invoke(() =>
             {
                 txtEstado.Text = mensaje;
 
-                // Si el mensaje indica fallo de enrolamiento, se muestra también alerta visual
-                if (mensaje.Contains("Error: las muestras no coinciden"))
+                if (mensaje.Contains("Error: las muestras no coincidieron"))
                 {
                     var alert = new MensajeWindow(mensaje);
                     alert.ShowDialog();
@@ -48,7 +50,6 @@ namespace BiomentricoHolding.Views.Empleado
             });
         }
 
-        // 👉 Mensaje tipo alerta con MensajeWindow
         private void MostrarAlerta(string mensaje)
         {
             Dispatcher.Invoke(() =>
@@ -70,7 +71,7 @@ namespace BiomentricoHolding.Views.Empleado
             });
         }
 
-        private void DibujarHuella(System.Drawing.Bitmap bmp)
+        private void DibujarHuella(Bitmap bmp)
         {
             Dispatcher.Invoke(() =>
             {
@@ -97,7 +98,6 @@ namespace BiomentricoHolding.Views.Empleado
 
                     panelHuellas.Children.Add(image);
 
-                    // Limpieza de memoria nativa
                     DeleteObject(hBitmap);
                 }
                 catch (Exception ex)
@@ -106,6 +106,7 @@ namespace BiomentricoHolding.Views.Empleado
                 }
             });
         }
+
         private void MostrarFalloYReintentar()
         {
             Dispatcher.Invoke(() =>
@@ -113,19 +114,16 @@ namespace BiomentricoHolding.Views.Empleado
                 var mensaje = new MensajeWindow("🛑 Las huellas no coincidieron.\n\nPor favor, intenta nuevamente.");
                 mensaje.ShowDialog();
 
-                // Limpia imágenes previas
                 panelHuellas.Children.Clear();
-
-                // Reinicia visualmente el estado
                 txtEstado.Text = "Coloca tu dedo nuevamente en el lector.";
             });
         }
+
         private void BtnCerrar_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        // Libera memoria del bitmap nativo
         [DllImport("gdi32.dll")]
         public static extern bool DeleteObject(IntPtr hObject);
     }
