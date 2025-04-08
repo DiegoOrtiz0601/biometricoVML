@@ -27,6 +27,7 @@ namespace BiomentricoHolding.Views.Empleado
             capturaService.Mensaje += MostrarMensajeTexto; // Solo en label
             capturaService.TemplateGenerado += HuellaCapturada;
             capturaService.MuestraProcesada += DibujarHuella;
+            capturaService.IntentoFallido += MostrarFalloYReintentar;
 
             capturaService.IniciarCaptura();
         }
@@ -105,7 +106,20 @@ namespace BiomentricoHolding.Views.Empleado
                 }
             });
         }
+        private void MostrarFalloYReintentar()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                var mensaje = new MensajeWindow("🛑 Las huellas no coincidieron.\n\nPor favor, intenta nuevamente.");
+                mensaje.ShowDialog();
 
+                // Limpia imágenes previas
+                panelHuellas.Children.Clear();
+
+                // Reinicia visualmente el estado
+                txtEstado.Text = "Coloca tu dedo nuevamente en el lector.";
+            });
+        }
         private void BtnCerrar_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

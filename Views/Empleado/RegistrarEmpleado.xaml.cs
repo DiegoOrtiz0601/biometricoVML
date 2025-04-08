@@ -17,6 +17,8 @@ namespace BiomentricoHolding.Views.Empleado
     {
         private DPFP.Template _huellaCapturada = null;
 
+        private bool esModificacion = false;
+        private int idEmpleadoActual = 0;
         public RegistrarEmpleado()
         {
             InitializeComponent();
@@ -140,27 +142,35 @@ namespace BiomentricoHolding.Views.Empleado
                         var empleado = context.Empleados.FirstOrDefault(e => e.Documento == cedula);
                         if (empleado != null)
                         {
+                            // ✅ Activar modo edición
+                            esModificacion = true;
+                            idEmpleadoActual = empleado.IdEmpleado;
+
+                            // ✅ Cambiar texto del formulario
+                            txtTituloFormulario.Text = "✏️ Actualización de Empleado";
+                            btnRegistrar.Content = "💾 Actualizar";
+
+                            // Cargar datos en el formulario
                             txtNombres.Text = empleado.Nombres;
                             txtApellidos.Text = empleado.Apellidos;
                             txtCedula.Text = empleado.Documento.ToString();
                             cbEmpresa.SelectedValue = empleado.IdEmpresa;
                             cbTipoEmpleado.SelectedValue = empleado.IdTipoEmpleado;
 
-                            // Cargar sedes y áreas correspondientes
                             cbEmpresa_SelectionChanged(null, null); // Refresca sedes
                             cbSede.SelectedValue = empleado.IdSede;
 
                             cbSede_SelectionChanged(null, null); // Refresca áreas
                             cbArea.SelectedValue = empleado.IdArea;
 
-                            // Cargar huella (desde base de datos a _huellaCapturada)
+                            // Cargar huella desde la BD
                             if (empleado.Huella != null)
                             {
                                 _huellaCapturada = new DPFP.Template(new System.IO.MemoryStream(empleado.Huella));
-                                MessageBox.Show("Huella cargada del sistema ✅", "Información");
+                                new MensajeWindow("✅ Huella cargada del sistema.").ShowDialog();
                             }
 
-                            MessageBox.Show("Empleado cargado correctamente para modificación.");
+                            new MensajeWindow("👤 Empleado cargado para modificación.").ShowDialog();
                         }
                     }
                 }
@@ -194,52 +204,85 @@ namespace BiomentricoHolding.Views.Empleado
 
                 using (var context = AppSettings.GetContextUno())
                 {
-                    var nuevoEmpleado = new BiomentricoHolding.Data.DataBaseRegistro_Test.Empleado
+                    if (esModificacion && idEmpleadoActual > 0)
                     {
-                        Documento = cedula,
-                        Nombres = txtNombres.Text.Trim(),
-                        Apellidos = txtApellidos.Text.Trim(),
-                        IdEmpresa = (int)cbEmpresa.SelectedValue,
-                        IdSede = (int)cbSede.SelectedValue,
-                        IdArea = (int)cbArea.SelectedValue,
-                        IdTipoEmpleado = (int)cbTipoEmpleado.SelectedValue,
-                        Huella = huellaBytes,
-                        Estado = true,
-                        FechaIngreso = DateTime.Now
-                    };
-
-                    context.Empleados.Add(nuevoEmpleado);
-                    context.SaveChanges();
-
-                    int idEmpleado = nuevoEmpleado.IdEmpleado;
-
-                    for (int dia = 2; dia <= 6; dia++)
-                    {
-                        context.EmpleadosHorarios.Add(new EmpleadosHorario
+                        // 🔄 MODIFICAR EMPLEADO
+                        var empleado = context.Empleados.FirstOrDefault(e => e.IdEmpleado == idEmpleadoActual);
+                        if (empleado != null)
                         {
-                            EmpleadoId = idEmpleado,
-                            DiaSemana = dia,
-                            Inicio = TimeOnly.Parse("07:00:00"),
-                            Fin = (dia == 5 || dia == 6) ? TimeOnly.Parse("16:30:00") : TimeOnly.Parse("17:30:00"),
-                            Estado = true
-                        });
+                            empleado.Nombres = txtNombres.Text.Trim();
+                            empleado.Apellidos = txtApellidos.Text.Trim();
+                            empleado.Documento = cedula;
+                            empleado.IdEmpresa = (int)cbEmpresa.SelectedValue;
+                            empleado.IdSede = (int)cbSede.SelectedValue;
+                            empleado.IdArea = (int)cbArea.SelectedValue;
+                            empleado.IdTipoEmpleado = (int)cbTipoEmpleado.SelectedValue;
+                            empleado.Huella = huellaBytes;
+                            empleado.FechaIngreso = DateTime.Now;
+
+                            context.SaveChanges();
+
+                            new MensajeWindow("✅ Empleado actualizado correctamente.").ShowDialog();
+
+                            esModificacion = false;
+                            idEmpleadoActual = 0;
+                            LimpiarFormulario();
+                        }
+                        else
+                        {
+                            new MensajeWindow("❌ No se encontró el empleado para modificar.").ShowDialog();
+                        }
                     }
-
-                    context.SaveChanges();
-                }
-
-                var confirmacion = new MensajeWindow("🎉 Empleado registrado correctamente.\n\n¿Deseas agregar otro empleado?", true);
-                bool? resultado = confirmacion.ShowDialog();
-
-                if (resultado == true)
-                {
-                    LimpiarFormulario();
-                }
-                else
-                {
-                    if (Application.Current.MainWindow.FindName("MainContent") is ContentControl contenedor)
+                    else
                     {
-                        contenedor.Content = null;
+                        // ➕ REGISTRAR NUEVO EMPLEADO
+                        var nuevoEmpleado = new BiomentricoHolding.Data.DataBaseRegistro_Test.Empleado
+                        {
+                            Documento = cedula,
+                            Nombres = txtNombres.Text.Trim(),
+                            Apellidos = txtApellidos.Text.Trim(),
+                            IdEmpresa = (int)cbEmpresa.SelectedValue,
+                            IdSede = (int)cbSede.SelectedValue,
+                            IdArea = (int)cbArea.SelectedValue,
+                            IdTipoEmpleado = (int)cbTipoEmpleado.SelectedValue,
+                            Huella = huellaBytes,
+                            Estado = true,
+                            FechaIngreso = DateTime.Now
+                        };
+
+                        context.Empleados.Add(nuevoEmpleado);
+                        context.SaveChanges();
+
+                        int idEmpleado = nuevoEmpleado.IdEmpleado;
+
+                        for (int dia = 2; dia <= 6; dia++)
+                        {
+                            context.EmpleadosHorarios.Add(new EmpleadosHorario
+                            {
+                                EmpleadoId = idEmpleado,
+                                DiaSemana = dia,
+                                Inicio = TimeOnly.Parse("07:00:00"),
+                                Fin = (dia == 5 || dia == 6) ? TimeOnly.Parse("16:30:00") : TimeOnly.Parse("17:30:00"),
+                                Estado = true
+                            });
+                        }
+
+                        context.SaveChanges();
+
+                        var confirmacion = new MensajeWindow("🎉 Empleado registrado correctamente.\n\n¿Deseas agregar otro empleado?", true);
+                        bool? resultado = confirmacion.ShowDialog();
+
+                        if (resultado == true)
+                        {
+                            LimpiarFormulario();
+                        }
+                        else
+                        {
+                            if (Application.Current.MainWindow.FindName("MainContent") is ContentControl contenedor)
+                            {
+                                contenedor.Content = null;
+                            }
+                        }
                     }
                 }
             }
@@ -248,6 +291,7 @@ namespace BiomentricoHolding.Views.Empleado
                 new MensajeWindow($"❌ Ocurrió un error inesperado:\n\n{ex.Message}").ShowDialog();
             }
         }
+
 
         private void BtnCapturarHuella_Click(object sender, RoutedEventArgs e)
         {
@@ -310,6 +354,11 @@ namespace BiomentricoHolding.Views.Empleado
                 bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
                 bitmapImage.StreamSource = memory;
                 bitmapImage.EndInit();
+                txtTituloFormulario.Text = "📋 Registro de Empleado";
+                btnRegistrar.Content = "✅ Registrar";
+                esModificacion = false;
+                idEmpleadoActual = 0;
+
                 return bitmapImage;
             }
         }

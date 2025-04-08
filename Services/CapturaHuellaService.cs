@@ -1,8 +1,8 @@
 ﻿using DPFP;
 using DPFP.Capture;
 using DPFP.Processing;
-using System.Drawing;
 using System;
+using System.Drawing;
 
 namespace BiomentricoHolding.Services
 {
@@ -10,12 +10,15 @@ namespace BiomentricoHolding.Services
     {
         private Capture Capturador;
         private Enrollment Enroller;
+        private bool primerIntento = true;
+        private bool lectorConectado = false;
 
         public Template TemplateCapturado { get; private set; }
 
         public event Action<string> Mensaje;
         public event Action<Template> TemplateGenerado;
-        public event Action<System.Drawing.Bitmap> MuestraProcesada;
+        public event Action<Bitmap> MuestraProcesada;
+        public event Action IntentoFallido;
 
         public CapturaHuellaService()
         {
@@ -40,10 +43,15 @@ namespace BiomentricoHolding.Services
 
         public void IniciarCaptura()
         {
+           
             try
             {
+                DetenerCaptura(); // Evita múltiples capturas
+                Enroller.Clear(); // Limpia datos anteriores
+                primerIntento = true;
+
                 Capturador?.StartCapture();
-                Mensaje?.Invoke("Coloca tu dedo en el lector.");
+                Mensaje?.Invoke("Coloca tu dedo en el lector para capturar la huella.");
             }
             catch (Exception ex)
             {
@@ -56,7 +64,7 @@ namespace BiomentricoHolding.Services
             try
             {
                 Capturador?.StopCapture();
-                Mensaje?.Invoke("Captura detenida.");
+                Mensaje?.Invoke("📴 Captura detenida.");
             }
             catch (Exception ex)
             {
@@ -66,84 +74,101 @@ namespace BiomentricoHolding.Services
 
         public void OnComplete(object capture, string readerSerialNumber, Sample sample)
         {
-            var features = ExtractFeatures(sample, DPFP.Processing.DataPurpose.Enrollment);
+            if (!primerIntento)
+            {
+                Mensaje?.Invoke("❌ Captura bloqueada. Debes reiniciar el proceso.");
+                DetenerCaptura();
+                return;
+            }
+
+            var features = ExtractFeatures(sample, DataPurpose.Enrollment);
 
             if (features != null)
             {
                 try
                 {
                     Enroller.AddFeatures(features);
+
+                    MuestraProcesada?.Invoke(ConvertirMuestraAImagen(sample));
                     Mensaje?.Invoke($"✅ Muestra válida. Faltan {Enroller.FeaturesNeeded} muestra(s).");
 
-                    var img = ConvertirMuestraAImagen(sample);
-                    MuestraProcesada?.Invoke(img);
-
-                    if (Enroller.TemplateStatus == DPFP.Processing.Enrollment.Status.Ready)
+                    if (Enroller.TemplateStatus == Enrollment.Status.Ready)
                     {
                         TemplateCapturado = Enroller.Template;
                         TemplateGenerado?.Invoke(TemplateCapturado);
-                        Mensaje?.Invoke("✅ Huella lista para guardar.");
+                        Mensaje?.Invoke("🎉 Huella capturada exitosamente.");
                         DetenerCaptura();
                     }
-                    else if (Enroller.TemplateStatus == DPFP.Processing.Enrollment.Status.Failed)
+                    else if (Enroller.TemplateStatus == Enrollment.Status.Failed)
                     {
-                        Mensaje?.Invoke("❌ Las muestras no coinciden. Reiniciando...");
-                        Enroller.Clear();
-                        IniciarCaptura();
+                        ManejarFallo("❌ Las muestras no coincidieron. Debes volver a intentarlo.");
                     }
                 }
                 catch (DPFP.Error.SDKException ex)
                 {
-                    Mensaje?.Invoke("❌ Error al capturar huella: " + ex.Message);
-                    Enroller.Clear();
-                    IniciarCaptura();
+                    ManejarFallo($"❌ Error crítico al capturar huella:\n{ex.Message}");
                 }
             }
             else
             {
-                Mensaje?.Invoke("⚠ Huella no clara. Intenta nuevamente.");
+                ManejarFallo("⚠ Huella no clara. Intenta nuevamente.");
             }
         }
 
-        private System.Drawing.Bitmap ConvertirMuestraAImagen(Sample sample)
+        private void ManejarFallo(string mensaje)
         {
-            var convertidor = new DPFP.Capture.SampleConversion();
-            var imagen = new System.Drawing.Bitmap(100, 100);
+            primerIntento = false;
+            IntentoFallido?.Invoke();
+            Enroller.Clear();
+            DetenerCaptura();
+            Mensaje?.Invoke(mensaje);
+        }
+
+        private Bitmap ConvertirMuestraAImagen(Sample sample)
+        {
+            var convertidor = new SampleConversion();
+            var imagen = new Bitmap(100, 100);
             convertidor.ConvertToPicture(sample, ref imagen);
             return imagen;
         }
 
         public void OnFingerTouch(object capture, string readerSerialNumber)
         {
-            Mensaje?.Invoke("Dedo detectado...");
+            if (primerIntento)
+                Mensaje?.Invoke("👆 Dedo detectado...");
         }
 
         public void OnFingerGone(object capture, string readerSerialNumber)
         {
-            Mensaje?.Invoke("Dedo retirado.");
+            if (primerIntento)
+                Mensaje?.Invoke("👋 Dedo retirado.");
         }
 
         public void OnReaderConnect(object capture, string readerSerialNumber)
         {
-            Mensaje?.Invoke("Lector conectado.");
+            lectorConectado = true;
+            Mensaje?.Invoke("✅ Lector conectado.");
         }
 
         public void OnReaderDisconnect(object capture, string readerSerialNumber)
         {
-            Mensaje?.Invoke("Lector desconectado.");
+            lectorConectado = false;
+            Mensaje?.Invoke("❌ Lector desconectado.");
         }
 
         public void OnSampleQuality(object capture, string readerSerialNumber, CaptureFeedback feedback)
         {
+            if (!primerIntento) return;
+
             if (feedback == CaptureFeedback.Good)
                 Mensaje?.Invoke("👌 Calidad de huella aceptable.");
             else
-                Mensaje?.Invoke("⚠ Huella no suficientemente clara.");
+                Mensaje?.Invoke("⚠ Calidad de huella insuficiente.");
         }
 
-        private FeatureSet ExtractFeatures(Sample sample, DPFP.Processing.DataPurpose purpose)
+        private FeatureSet ExtractFeatures(Sample sample, DataPurpose purpose)
         {
-            var extractor = new DPFP.Processing.FeatureExtraction();
+            var extractor = new FeatureExtraction();
             CaptureFeedback feedback = CaptureFeedback.None;
             var features = new FeatureSet();
 

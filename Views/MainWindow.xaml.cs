@@ -25,7 +25,8 @@ namespace BiomentricoHolding
 
         private void BtnControlAcceso_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Control de acceso");
+            CapturaEntradaSalidaWindow ventanaCaptura = new CapturaEntradaSalidaWindow();
+            ventanaCaptura.ShowDialog(); // Modal (bloquea hasta que se cierre)
         }
 
         private void BtnConsultarRegistros_Click(object sender, RoutedEventArgs e)

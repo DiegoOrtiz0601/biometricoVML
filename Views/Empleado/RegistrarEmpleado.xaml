@@ -29,12 +29,13 @@
                     <StackPanel>
 
                         <!-- Título -->
-                        <TextBlock Text="📋 Registro de Empleado"
-                                   FontSize="24"
-                                   FontWeight="Bold"
-                                   Foreground="#1F2937"
-                                   HorizontalAlignment="Center"
-                                   Margin="0,0,0,30"/>
+                        <TextBlock x:Name="txtTituloFormulario"
+           Text="📋 Registro de Empleado"
+           FontSize="24"
+           FontWeight="Bold"
+           Foreground="#1F2937"
+           HorizontalAlignment="Center"
+           Margin="0,0,0,30"/>
 
                         <!-- Campo Cédula con ícono alineado -->
                         <Grid Margin="10,0,10,20">
@@ -129,21 +130,25 @@
             Margin="0,20,0,0">
 
                             <!-- Botones -->
+                            <!-- Botones -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Button Content="📸 Capturar Huella"
-                Width="150"
-                Height="35"
-                Margin="0,0,10,0"
-                Click="BtnCapturarHuella_Click"/>
+            Width="150"
+            Height="35"
+            Margin="0,0,10,0"
+            Click="BtnCapturarHuella_Click"/>
 
-                                <Button Content="✅ Registrar"
-                Width="150"
-                Height="35"
-                Background="#007ACC"
-                Foreground="White"
-                FontWeight="Bold"
-                Click="BtnRegistrar_Click"/>
+                                <!-- BOTÓN DE REGISTRO CON x:Name -->
+                                <Button x:Name="btnRegistrar"
+            Content="✅ Registrar"
+            Width="150"
+            Height="35"
+            Background="#007ACC"
+            Foreground="White"
+            FontWeight="Bold"
+            Click="BtnRegistrar_Click"/>
                             </StackPanel>
+
 
                             <!-- Vista previa con borde -->
                             <!-- Imagen de la huella con borde decorativo -->
