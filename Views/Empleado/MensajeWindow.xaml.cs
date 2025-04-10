@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Media;
 
 namespace BiomentricoHolding.Views
 {
@@ -11,12 +13,11 @@ namespace BiomentricoHolding.Views
             InitializeComponent();
             txtMensaje.Text = mensaje;
             btnCancelar.Visibility = mostrarCancelar ? Visibility.Visible : Visibility.Collapsed;
-
-
         }
 
+        // Constructor con autocierre
         public MensajeWindow(string mensaje, int segundosAutocierre)
-    : this(mensaje, false) // llama al constructor base
+            : this(mensaje, false)
         {
             btnOK.Visibility = Visibility.Collapsed;
             btnCancelar.Visibility = Visibility.Collapsed;
@@ -32,8 +33,10 @@ namespace BiomentricoHolding.Views
             };
             timer.Start();
         }
+
+        // Constructor para mensaje de carga tipo modal (sin botones)
         public MensajeWindow(string mensaje, bool mostrarCancelar, bool esCarga)
-    : this(mensaje, mostrarCancelar)
+            : this(mensaje, mostrarCancelar)
         {
             if (esCarga)
             {
@@ -43,6 +46,42 @@ namespace BiomentricoHolding.Views
             }
         }
 
+        // Constructor con tipo de mensaje (alerta, info, etc.)
+        public MensajeWindow(string mensaje, int segundosAutocierre, string tipo)
+            : this(mensaje, false)
+        {
+            btnOK.Visibility = Visibility.Collapsed;
+            btnCancelar.Visibility = Visibility.Collapsed;
+
+            // Cambiar ícono y color
+            switch (tipo.ToLower())
+            {
+                case "advertencia":
+                    icono.Text = "⚠";
+                    icono.Foreground = System.Windows.Media.Brushes.DarkOrange;
+
+                    break;
+                case "error":
+                    icono.Text = "❌";
+                    icono.Foreground = System.Windows.Media.Brushes.Red;
+                    break;
+                default: // info
+                    icono.Text = "🔔";
+                    icono.Foreground = System.Windows.Media.Brushes.SteelBlue;
+                    break;
+            }
+
+            var timer = new System.Windows.Threading.DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(segundosAutocierre)
+            };
+            timer.Tick += (s, e) =>
+            {
+                timer.Stop();
+                this.Close();
+            };
+            timer.Start();
+        }
 
         private void BtnOK_Click(object sender, RoutedEventArgs e)
         {
@@ -55,6 +94,5 @@ namespace BiomentricoHolding.Views
             Resultado = false;
             this.DialogResult = false;
         }
-
     }
 }

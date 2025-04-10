@@ -36,19 +36,22 @@
         </StackPanel>
 
         <!-- Reloj -->
-        <TextBlock Grid.Row="1"
-                   x:Name="txtReloj"
-                   FontSize="36"
-                   FontWeight="Bold"
-                   Foreground="#c70100"
-                   HorizontalAlignment="Center"
-                   Margin="0,10"/>
-
-        <TextBlock x:Name="txtFecha"
-           FontSize="16"
-           Foreground="Gray"
-           HorizontalAlignment="Center"
-           Margin="0,5,0,10"/>
+        <!-- Reloj + Fecha -->
+        <StackPanel Grid.Row="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="0,10,0,10">
+            <TextBlock x:Name="txtReloj"
+               FontSize="36"
+               FontWeight="Bold"
+               Foreground="#c70100"
+               HorizontalAlignment="Center"/>
+            <TextBlock x:Name="txtFecha"
+               FontSize="16"
+               Foreground="Gray"
+               HorizontalAlignment="Center"
+               Margin="0,4,0,0"/>
+        </StackPanel>
 
         <!-- Contenedor principal horizontal: datos + huella -->
         <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">

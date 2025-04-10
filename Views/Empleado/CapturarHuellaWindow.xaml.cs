@@ -16,7 +16,6 @@ namespace BiomentricoHolding.Views.Empleado
 
         public Template ResultadoTemplate { get; private set; }
 
-        // Imagen convertida para mostrar en RegistrarEmpleado
         public ImageSource UltimaHuellaCapturada { get; private set; }
 
         public CapturarHuellaWindow()
@@ -25,12 +24,12 @@ namespace BiomentricoHolding.Views.Empleado
 
             capturaService = new CapturaHuellaService
             {
-                Modo = ModoCaptura.Registro // 👈 muy importante
+                Modo = ModoCaptura.Registro // ✅ Muy importante para que no se active la verificación
             };
 
             capturaService.Mensaje += MostrarMensajeTexto;
             capturaService.TemplateGenerado += HuellaCapturada;
-            capturaService.MuestraProcesadaImagen += DibujarHuella; // 👈 actualizamos este
+            capturaService.MuestraProcesadaImagen += DibujarHuella;
             capturaService.IntentoFallido += MostrarFalloYReintentar;
 
             capturaService.IniciarCaptura();
@@ -44,8 +43,7 @@ namespace BiomentricoHolding.Views.Empleado
 
                 if (mensaje.Contains("Error: las muestras no coincidieron"))
                 {
-                    var alert = new MensajeWindow(mensaje);
-                    alert.ShowDialog();
+                    new MensajeWindow(mensaje).ShowDialog();
                 }
             });
         }
@@ -54,8 +52,7 @@ namespace BiomentricoHolding.Views.Empleado
         {
             Dispatcher.Invoke(() =>
             {
-                var msg = new MensajeWindow(mensaje);
-                msg.ShowDialog();
+                new MensajeWindow(mensaje).ShowDialog();
             });
         }
 
@@ -67,7 +64,7 @@ namespace BiomentricoHolding.Views.Empleado
             {
                 MostrarAlerta("✅ Huella capturada correctamente.");
                 this.DialogResult = true;
-                this.Close();
+                this.Close(); // Cerramos la ventana
             });
         }
 
@@ -111,9 +108,7 @@ namespace BiomentricoHolding.Views.Empleado
         {
             Dispatcher.Invoke(() =>
             {
-                var mensaje = new MensajeWindow("🛑 Las huellas no coincidieron.\n\nPor favor, intenta nuevamente.");
-                mensaje.ShowDialog();
-
+                new MensajeWindow("🛑 Las huellas no coincidieron.\n\nPor favor, intenta nuevamente.").ShowDialog();
                 panelHuellas.Children.Clear();
                 txtEstado.Text = "Coloca tu dedo nuevamente en el lector.";
             });
@@ -121,10 +116,17 @@ namespace BiomentricoHolding.Views.Empleado
 
         private void BtnCerrar_Click(object sender, RoutedEventArgs e)
         {
+            capturaService.DetenerCaptura(); // ✅ Para que el lector se libere correctamente
             this.Close();
         }
 
         [DllImport("gdi32.dll")]
         public static extern bool DeleteObject(IntPtr hObject);
+
+        protected override void OnClosed(EventArgs e)
+        {
+            capturaService.DetenerCaptura(); // ✅ Seguridad adicional al cerrar
+            base.OnClosed(e);
+        }
     }
 }

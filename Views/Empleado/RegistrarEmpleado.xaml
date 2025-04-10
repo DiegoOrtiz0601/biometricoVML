@@ -11,7 +11,7 @@
                 VerticalAlignment="Top">
 
             <Grid>
-                <!-- Botón cerrar fuera del ScrollViewer -->
+                <!-- Botón cerrar -->
                 <Button Content="❌"
                         Width="30"
                         Height="30"
@@ -28,16 +28,15 @@
                 <ScrollViewer Margin="0,40,0,0" VerticalScrollBarVisibility="Auto">
                     <StackPanel>
 
-                        <!-- Título -->
                         <TextBlock x:Name="txtTituloFormulario"
-           Text="📋 Registro de Empleado"
-           FontSize="24"
-           FontWeight="Bold"
-           Foreground="#1F2937"
-           HorizontalAlignment="Center"
-           Margin="0,0,0,30"/>
+                                   Text="📋 Registro de Empleado"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   Foreground="#1F2937"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,0,0,30"/>
 
-                        <!-- Campo Cédula con ícono alineado -->
+                        <!-- Cédula -->
                         <Grid Margin="10,0,10,20">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -79,7 +78,7 @@
                                        ToolTip="Cédula disponible"/>
                         </Grid>
 
-                        <!-- Formulario en dos columnas -->
+                        <!-- Formulario 2 columnas -->
                         <Grid Margin="0,0,0,20">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -124,55 +123,44 @@
                             </StackPanel>
                         </Grid>
 
-                        <!-- Botones + Imagen -->
-                        <StackPanel Orientation="Vertical"
-            HorizontalAlignment="Center"
-            Margin="0,20,0,0">
-
-                            <!-- Botones -->
-                            <!-- Botones -->
+                        <!-- Botones + imagen -->
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,20,0,0">
+                            <!-- Botones de acción -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Button Content="📸 Capturar Huella"
-            Width="150"
-            Height="35"
-            Margin="0,0,10,0"
-            Click="BtnCapturarHuella_Click"/>
+                Width="150"
+                Height="35"
+                Margin="0,0,10,0"
+                Click="BtnCapturarHuella_Click"
+                Style="{StaticResource BotonRojo}"/>
 
-                                <!-- BOTÓN DE REGISTRO CON x:Name -->
                                 <Button x:Name="btnRegistrar"
-            Content="✅ Registrar"
-            Width="150"
-            Height="35"
-            Background="#007ACC"
-            Foreground="White"
-            FontWeight="Bold"
-            Click="BtnRegistrar_Click"/>
+                Content="✅ Registrar"
+                Width="150"
+                Height="35"
+                Click="BtnRegistrar_Click"
+                Style="{StaticResource BotonRojo}"/>
                             </StackPanel>
 
-
                             <!-- Vista previa con borde -->
-                            <!-- Imagen de la huella con borde decorativo -->
-                <Border x:Name="imgHuellaBorder"
-                   BorderBrush="#E5E7EB"
-                   BorderThickness="2"
-                   CornerRadius="8"
-                   Margin="0,15,0,0"
-                   Padding="5"
-                   Background="#FFFFFF"
-                   Visibility="Collapsed"
-                   HorizontalAlignment="Center"
-                   Effect="{DynamicResource DropShadow}">
+                            <Border x:Name="imgHuellaBorder"
+            BorderBrush="#E5E7EB"
+            BorderThickness="2"
+            CornerRadius="8"
+            Margin="0,15,0,0"
+            Padding="5"
+            Background="#FFFFFF"
+            Visibility="Collapsed"
+            HorizontalAlignment="Center"
+            Effect="{DynamicResource DropShadow}">
 
-                   <Image x:Name="imgHuella"
-                    Width="120"
-                    Height="120"
-                    Stretch="Uniform"
-                    ToolTip="Vista previa de huella" />
-                </Border>
-
+                                <Image x:Name="imgHuella"
+               Width="120"
+               Height="120"
+               Stretch="Uniform"
+               ToolTip="Vista previa de huella" />
+                            </Border>
                         </StackPanel>
-
-
                     </StackPanel>
                 </ScrollViewer>
             </Grid>

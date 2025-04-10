@@ -167,10 +167,13 @@ namespace BiomentricoHolding.Views.Empleado
                             if (empleado.Huella != null)
                             {
                                 _huellaCapturada = new DPFP.Template(new System.IO.MemoryStream(empleado.Huella));
-                                new MensajeWindow("✅ Huella cargada del sistema.").ShowDialog();
+
+                                //var msgHuella = new MensajeWindow("✅ Huella cargada del sistema.", 1); // mensaje por 3 segundos
+                                //msgHuella.ShowDialog();
                             }
 
-                            new MensajeWindow("👤 Empleado cargado para modificación.").ShowDialog();
+                            //var msgMod = new MensajeWindow("👤 Empleado cargado para modificación.", 1);
+                            //msgMod.ShowDialog();
                         }
                     }
                 }
@@ -341,8 +344,15 @@ namespace BiomentricoHolding.Views.Empleado
             if (mainWindow != null && mainWindow.FindName("MainContent") is ContentControl contenedor)
             {
                 contenedor.Content = null;
+
+                // ✅ Mostrar el GIF si estamos en el MainWindow
+                if (mainWindow is MainWindow ventanaPrincipal)
+                {
+                    ventanaPrincipal.MostrarGifBienvenida();
+                }
             }
         }
+
         private BitmapImage ConvertirBitmapAImageSource(Bitmap bitmap)
         {
             using (MemoryStream memory = new MemoryStream())

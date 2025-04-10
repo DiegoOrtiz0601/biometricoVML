@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="appsettings.json" />
+    <None Remove="Assets\logo.gif" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Assets\" />
     <Folder Include="Data\DataBaseRegistro_Test\" />
     <Folder Include="Data\dbVMLTalentoHumano\" />
     <Folder Include="Libs\DigitalPersona\" />
@@ -36,6 +36,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.3" />
     <PackageReference Include="System.Drawing.Common" Version="9.0.3" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
   </ItemGroup>
 	<ItemGroup>
 		<Reference Include="DPFPDevNET">
@@ -54,6 +55,11 @@
 			<HintPath>Libs\DigitalPersona\DPFPShrNET.dll</HintPath>
 			<Private>True</Private>
 		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Include="Assets\logo.gif">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
 </Project>

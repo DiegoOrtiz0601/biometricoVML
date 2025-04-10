@@ -11,18 +11,17 @@
         Topmost="True">
 
     <Grid Background="#80000000">
-        <!-- Fondo semitransparente -->
+        <!-- Fondo oscuro semitransparente -->
         <Border Background="White"
                 CornerRadius="16"
                 Padding="25"
                 Width="380"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Effect="{DynamicResource DropShadow}"
-                >
+                Effect="{DynamicResource DropShadow}">
 
             <StackPanel>
-                <!-- Encabezado -->
+                <!-- Título -->
                 <TextBlock Text="⚠️ Empleado ya registrado"
                            FontSize="18"
                            FontWeight="Bold"
@@ -40,23 +39,77 @@
                            Foreground="#1F2937"/>
 
                 <!-- Botones -->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0,10,0,0">
+
+                    <!-- Botón Modificar -->
                     <Button x:Name="btnModificar"
                             Content="✏️ Modificar"
                             Width="140"
-                            Margin="0,0,10,0"
-                            Background="#007ACC"
+                            Height="35"
+                            FontWeight="Bold"
                             Foreground="White"
-                            FontWeight="SemiBold"
-                            Click="BtnModificar_Click"/>
+                            Background="#680307"
+                            Cursor="Hand"
+                            Click="BtnModificar_Click"
+                            Margin="0,0,10,0">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    CornerRadius="8"
+                                                    Padding="10">
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#343a40"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
 
+                    <!-- Botón Cerrar -->
                     <Button x:Name="btnCerrar"
                             Content="❌ Cerrar"
                             Width="100"
+                            Height="35"
+                            FontWeight="Bold"
                             Background="#E5E7EB"
-                            Foreground="Black"
-                            FontWeight="SemiBold"
-                            Click="BtnCerrar_Click"/>
+                            Foreground="#1F2937"
+                            Cursor="Hand"
+                            Click="BtnCerrar_Click">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    CornerRadius="8"
+                                                    Padding="10">
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#D1D5DB"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
                 </StackPanel>
             </StackPanel>
         </Border>
