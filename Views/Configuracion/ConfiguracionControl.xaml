@@ -99,6 +99,12 @@
                             <TextBlock Text="Salir"/>
                         </StackPanel>
                     </Button>
+                    <Button Style="{StaticResource BotonRojoRedondeado}" Click="BtnLimpiarLog_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE74D;" Margin="0,0,5,0"/>
+                            <TextBlock Text="Limpiar Log"/>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
             </Grid>
         </Border>

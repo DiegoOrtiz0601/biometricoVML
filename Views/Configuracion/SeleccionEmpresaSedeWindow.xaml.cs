@@ -1,8 +1,7 @@
-﻿using System.Linq;
+﻿using BiomentricoHolding.Data.DataBaseRegistro_Test;
+using BiomentricoHolding.Utils;
 using System.Windows;
 using System.Windows.Controls;
-using BiomentricoHolding.Data.DataBaseRegistro_Test;
-using BiomentricoHolding.Utils;
 
 namespace BiomentricoHolding.Views.Configuracion
 {

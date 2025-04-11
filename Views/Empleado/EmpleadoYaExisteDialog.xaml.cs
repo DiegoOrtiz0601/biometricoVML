@@ -2,7 +2,7 @@
 
 namespace BiomentricoHolding.Views.Empleado
 {
-   
+
     public partial class EmpleadoYaExisteDialog : Window
     {
         public bool Modificar { get; private set; } = false;

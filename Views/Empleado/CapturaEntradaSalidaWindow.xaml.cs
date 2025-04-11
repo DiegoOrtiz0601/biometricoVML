@@ -1,17 +1,15 @@
-﻿using BiomentricoHolding.Services;
-using System;
+﻿using BiomentricoHolding.Data.DataBaseRegistro_Test;
+using BiomentricoHolding.Services;
+using BiomentricoHolding.Utils;
+using DPFP;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using BiomentricoHolding.Data.DataBaseRegistro_Test;
 using EmpleadoModel = BiomentricoHolding.Data.DataBaseRegistro_Test.Empleado;
-using DPFP;
-using BiomentricoHolding.Utils;
 
 namespace BiomentricoHolding.Views.Empleado
 {
@@ -24,16 +22,14 @@ namespace BiomentricoHolding.Views.Empleado
         {
             InitializeComponent();
             Logger.Agregar("📡 Iniciando módulo de verificación de huella.");
+
             IniciarReloj();
             ConfigurarEventosHuella();
         }
 
         private void IniciarReloj()
         {
-            _timer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromSeconds(1)
-            };
+            _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             _timer.Tick += (s, e) =>
             {
                 var cultura = new CultureInfo("es-CO");
@@ -55,7 +51,7 @@ namespace BiomentricoHolding.Views.Empleado
         private void BtnReiniciar_Click(object sender, RoutedEventArgs e)
         {
             LimpiarFormulario();
-            _capturaService.Modo = ModoCaptura.Verificacion;
+            _capturaService.DetenerCaptura(); // Detenemos por seguridad antes de reiniciar
             _capturaService.IniciarCaptura();
         }
 
@@ -95,9 +91,10 @@ namespace BiomentricoHolding.Views.Empleado
             return bitmapImage;
         }
 
-        private void ProcesarHuellaVerificacion(DPFP.Sample sample)
+        private void ProcesarHuellaVerificacion(Sample sample)
         {
-            _capturaService.DetenerCaptura();
+            _capturaService.DetenerCaptura(); // Siempre detener antes de procesar
+
             MensajeWindow buscandoWindow = null;
 
             Dispatcher.Invoke(() =>
@@ -106,7 +103,6 @@ namespace BiomentricoHolding.Views.Empleado
 
                 var extractor = new DPFP.Processing.FeatureExtraction();
                 var feedback = DPFP.Capture.CaptureFeedback.None;
-
                 FeatureSet features = new FeatureSet();
                 extractor.CreateFeatureSet(sample, DPFP.Processing.DataPurpose.Verification, ref feedback, ref features);
 
@@ -114,6 +110,7 @@ namespace BiomentricoHolding.Views.Empleado
                 {
                     Logger.Agregar("❌ No se pudo leer la huella correctamente.");
                     MostrarMensaje("❌ No se pudo leer la huella correctamente.");
+                    _capturaService.IniciarCaptura();
                     return;
                 }
 
@@ -122,7 +119,6 @@ namespace BiomentricoHolding.Views.Empleado
 
                 using var db = new DataBaseRegistro_TestDbContext();
                 var empleados = db.Empleados.Where(e => e.Huella != null && e.Estado == true).ToList();
-
                 var verificador = new DPFP.Verification.Verification();
                 var resultado = new DPFP.Verification.Verification.Result();
 
@@ -138,7 +134,9 @@ namespace BiomentricoHolding.Views.Empleado
                             Logger.Agregar($"✅ Huella verificada: {empleado.Nombres} {empleado.Apellidos} ({empleado.Documento})");
                             buscandoWindow?.Close();
                             MostrarDatosEmpleado(empleado);
-                            DeterminarTipoMarcacion(empleado);
+
+                            // Continuar verificación en segundo plano
+                            Dispatcher.InvokeAsync(() => DeterminarTipoMarcacion(empleado));
                             return;
                         }
                     }
@@ -155,13 +153,12 @@ namespace BiomentricoHolding.Views.Empleado
 
                 Logger.Agregar("❌ Huella no coincide con ningún empleado registrado.");
                 buscandoWindow?.Close();
-                //MostrarMensaje("❌ Huella no coincide con ningún empleado registrado.");
 
                 Dispatcher.BeginInvoke(() =>
                 {
+                    MostrarMensaje("❌ Huella no coincide con ningún empleado.");
                     var alerta = new MensajeWindow("❌ Huella no coincide con ningún empleado. Por favor intente nuevamente", 3);
-                    alerta.ShowDialog();
-                    LimpiarFormulario();
+                    alerta.Show();
                     _capturaService.IniciarCaptura();
                 });
             });
@@ -169,7 +166,6 @@ namespace BiomentricoHolding.Views.Empleado
 
         private void MostrarDatosEmpleado(EmpleadoModel empleado)
         {
-            MostrarMensaje($"👤 Mostrando datos: {empleado.Nombres} {empleado.Apellidos}");
             lblNombreEmpleado.Text = $"Nombre: {empleado.Nombres} {empleado.Apellidos}";
             lblDocumento.Text = $"Documento: {empleado.Documento}";
             lblTipoMarcacion.Text = "Procesando...";
@@ -193,14 +189,13 @@ namespace BiomentricoHolding.Views.Empleado
 
                 if (horario == null)
                 {
-                    Logger.Agregar($"⚠ Sin horario para hoy: {empleado.Nombres} {empleado.Apellidos}");
                     MostrarMensaje("⚠ No hay horario configurado para hoy.");
                     lblTipoMarcacion.Text = "Sin horario";
                     lblEstadoMarcacion.Text = "⛔";
                     return;
                 }
 
-                var horaActual = DateTime.Now.TimeOfDay;
+                var horaActual = hoy.TimeOfDay;
                 var entrada = horario.Inicio.ToTimeSpan();
                 var salida = horario.Fin.ToTimeSpan();
 
@@ -223,27 +218,18 @@ namespace BiomentricoHolding.Views.Empleado
                     tipoTexto = "Salida";
                 }
 
-                var cincoMinutosAtras = DateTime.Now.AddMinutes(-5);
-                var marcacionReciente = db.Marcaciones.Any(m =>
-                    m.IdEmpleado == empleado.IdEmpleado &&
-                    m.FechaHora >= cincoMinutosAtras);
+                var cincoMinutosAtras = hoy.AddMinutes(-5);
+                var ultima = db.Marcaciones
+                    .Where(m => m.IdEmpleado == empleado.IdEmpleado && m.FechaHora >= cincoMinutosAtras)
+                    .OrderByDescending(m => m.FechaHora)
+                    .FirstOrDefault();
 
-                if (marcacionReciente)
+                if (ultima != null)
                 {
-                    var ultima = db.Marcaciones.Where(m => m.IdEmpleado == empleado.IdEmpleado)
-                        .OrderByDescending(m => m.FechaHora)
-                        .FirstOrDefault();
-
-                    var diferencia = DateTime.Now - (ultima?.FechaHora ?? DateTime.MinValue);
-                    Logger.Agregar($"⚠️ Marcación duplicada: {empleado.Nombres} {empleado.Apellidos}. Hace {diferencia.Minutes}m {diferencia.Seconds}s");
-
-                    Dispatcher.BeginInvoke(() =>
-                    {
-                        var advertencia = new MensajeWindow($"⚠ {empleado.Nombres} {empleado.Apellidos} ya registró una marcación de tipo {ultima?.IdTipoMarcacion} hace {diferencia.Minutes} minutos y {diferencia.Seconds} segundos.\n⏳ Debe esperar 5 minutos para volver a marcar.", 5, tipo: "advertencia");
-                        advertencia.ShowDialog();
-                        LimpiarFormulario();
-                        _capturaService.IniciarCaptura();
-                    });
+                    var diferencia = hoy - ultima.FechaHora;
+                    var mensaje = $"⚠ {empleado.Nombres} {empleado.Apellidos} ya registró una marcación de tipo {ultima.IdTipoMarcacion} hace {diferencia.Minutes} min {diferencia.Seconds} seg.\n⏳ Debe esperar 5 minutos.";
+                    new MensajeWindow(mensaje, 5, tipo: "advertencia").Show();
+                    _capturaService.IniciarCaptura();
                     return;
                 }
 
@@ -252,7 +238,7 @@ namespace BiomentricoHolding.Views.Empleado
                     IdEmpleado = empleado.IdEmpleado,
                     FechaHora = hoy,
                     IdEmpresa = empleado.IdEmpresa,
-                    IdSede = empleado.IdSede,
+                    IdSede = ConfiguracionSistema.IdSedeActual ?? empleado.IdSede,
                     IdTipoMarcacion = tipoMarcacion
                 };
 
@@ -262,24 +248,23 @@ namespace BiomentricoHolding.Views.Empleado
                 lblTipoMarcacion.Text = tipoTexto;
                 lblEstadoMarcacion.Text = "✔ Registrado";
 
-                string hora = DateTime.Now.ToString("HH:mm:ss");
-                Logger.Agregar($"📝 {tipoTexto} registrada para {empleado.Nombres} {empleado.Apellidos} a las {hora}");
-
-                Dispatcher.BeginInvoke(() =>
-                {
-                    var ventana = new MensajeWindow($"✅ {tipoTexto} registrada\nHora: {hora}", 3);
-                    ventana.ShowDialog();
-                    LimpiarFormulario();
-                    _capturaService.IniciarCaptura();
-                });
+                string hora = hoy.ToString("HH:mm:ss");
+                new MensajeWindow($"✅ {tipoTexto} registrada\nHora: {hora}", 3).Show();
+                _capturaService.IniciarCaptura();
             }
             catch (Exception ex)
             {
-                Logger.Agregar($"❌ Error al registrar marcación: {ex.Message}");
                 MostrarMensaje("❌ Error al registrar la marcación: " + ex.Message);
                 lblTipoMarcacion.Text = "Error";
                 lblEstadoMarcacion.Text = "⛔";
             }
+        }
+
+        // 🚨 IMPORTANTE: Detener captura al cerrar la ventana
+        protected override void OnClosed(EventArgs e)
+        {
+            _capturaService.DetenerCaptura();
+            base.OnClosed(e);
         }
     }
 }

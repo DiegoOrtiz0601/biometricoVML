@@ -1,12 +1,14 @@
-﻿using BiomentricoHolding.Views.Empleado;
-using System.Windows;
-using System.Windows.Input;
-using WpfAnimatedGif;
-using System.Windows.Media.Imaging;
-using System.IO;
+﻿using BiomentricoHolding.Utils;
 using BiomentricoHolding.Views;
-using System.Windows.Controls;
 using BiomentricoHolding.Views.Configuracion;
+using BiomentricoHolding.Views.Empleado;
+using System.IO;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media.Imaging;
+using WpfAnimatedGif;
+using BiomentricoHolding.Views.Reportes;
 
 namespace BiomentricoHolding
 {
@@ -19,8 +21,9 @@ namespace BiomentricoHolding
                 InitializeComponent();
                 this.Loaded += MainWindow_Loaded; // mover la lógica aquí
             }
-            catch (Exception ex) {
-                MessageBox.Show("error construtor"+ ex.ToString() );
+            catch (Exception ex)
+            {
+                MessageBox.Show("error construtor" + ex.ToString());
                 throw;
             }
         }
@@ -84,23 +87,33 @@ namespace BiomentricoHolding
 
         private void BtnConsultarRegistros_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Consultar registros");
+            MainContent.Content = new ReportesView();
+            imgBienvenida.Visibility = Visibility.Collapsed;
+            MainContent.Visibility = Visibility.Visible;
         }
+
 
 
         private void BtnConfiguracion_Click(object sender, RoutedEventArgs e)
         {
-            try
+            var login = new MiniLoginWindow();
+            bool? resultado = login.ShowDialog();
+
+            if (resultado == true && login.AccesoPermitido)
             {
-                MainContent.Content = new ConfiguracionControl(); // Reutiliza tu control
+                Logger.Agregar("🔐 Acceso autorizado a Configuración");
+                MainContent.Content = new ConfiguracionControl();
                 imgBienvenida.Visibility = Visibility.Collapsed;
                 MainContent.Visibility = Visibility.Visible;
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("❌ Error al abrir configuración:\n" + ex.Message);
+                Logger.Agregar("🚫 Acceso denegado a Configuración");
+                var mensaje = new MensajeWindow("⚠️ Acceso denegado o cancelado.");
+                mensaje.ShowDialog();
             }
         }
+
 
 
 
@@ -132,7 +145,7 @@ namespace BiomentricoHolding
                     ImageBehavior.SetAnimatedSource(img, image);
                     img.Visibility = Visibility.Visible;
                 }
-                    
+
                 if (FindName("MainContent") is ContentControl contenedor)
                 {
                     contenedor.Content = null;

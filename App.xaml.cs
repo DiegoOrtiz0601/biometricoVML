@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using BiomentricoHolding.Utils;
 using BiomentricoHolding.Views.Configuracion;
-using BiomentricoHolding.Utils;
+using System.Windows;
 
 namespace BiomentricoHolding
 {
@@ -33,21 +33,26 @@ namespace BiomentricoHolding
                     if (resultado != true || !ConfiguracionSistema.EstaConfigurado)
                     {
                         MessageBox.Show("❌ El sistema no puede iniciar sin configuración.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        
+
                         return;
                     }
                 }
 
                 // 5. Cargar MainWindow si todo está bien
 
-               
+
 
                 MainWindow = new MainWindow();
                 MainWindow.Show();
 
                 DispatcherUnhandledException += (sender, args) =>
                 {
-                    MessageBox.Show("💥 Excepción no controlada:\n" + args.Exception.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("💥 Excepción no controlada:\n\n" +
+                   $"Mensaje: {args.Exception.Message}\n\n" +
+                   $"StackTrace:\n{args.Exception.StackTrace}",
+                   "ERROR",
+                   MessageBoxButton.OK,
+                   MessageBoxImage.Error);
                     args.Handled = true;
                 };
             }

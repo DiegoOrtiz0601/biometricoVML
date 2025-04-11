@@ -1,6 +1,5 @@
-﻿using System.Windows;
-using BiomentricoHolding.Views.Configuracion;
-using BiomentricoHolding.Views.Empleado;
+﻿using BiomentricoHolding.Views.Empleado;
+using System.Windows;
 
 namespace BiomentricoHolding.Views.Configuracion
 {

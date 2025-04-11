@@ -1,7 +1,6 @@
 ﻿<Window x:Class="BiomentricoHolding.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        
         Title="Sistema Biométrico Holding"
         WindowStartupLocation="CenterScreen"
         Height="600" Width="1000"
@@ -11,16 +10,13 @@
         AllowsTransparency="False">
 
     <Grid>
-         <!--Definición de filas: Header | Contenido--> 
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-         <!--🟫 Encabezado personalizado oscuro--> 
-        <Border Grid.Row="0"
-                Background="#343a40"
-                MouseDown="BarraTitulo_MouseDown">
+        <!-- Encabezado superior -->
+        <Border Grid.Row="0" Background="#343a40" MouseDown="BarraTitulo_MouseDown">
             <DockPanel Margin="10,0" VerticalAlignment="Center">
                 <TextBlock Text="🛡️  Sistema Biométrico Holding"
                            Foreground="White"
@@ -30,14 +26,14 @@
             </DockPanel>
         </Border>
 
-         <!--🧭 Contenido principal: barra lateral + contenido dinámico--> 
+        <!-- Contenido principal con menú lateral -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="220"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-             <!--Sidebar--> 
+            <!-- Barra lateral -->
             <StackPanel Background="#680307" Grid.Column="0">
                 <TextBlock Text="Control de Ingreso"
                            Foreground="White"
@@ -51,10 +47,9 @@
                            FontWeight="Bold"
                            Margin="10,0,20,10"
                            HorizontalAlignment="Center"/>
-  
-    <Separator Margin="10"/>
+                <Separator Margin="10"/>
 
-                 <!--Botones de navegación--> 
+                <!-- Botones de navegación -->
                 <Button Content="📋 Registrar Empleado"
                         Click="BtnRegistrarEmpleado_Click"
                         Style="{StaticResource SidebarButtonStyle}" />
@@ -77,17 +72,17 @@
                         Margin="10,40,10,10"/>
             </StackPanel>
 
-             <!--Zona dinámica de contenido (GIF + módulo cargado)--> 
+            <!-- Contenedor de contenido dinámico -->
             <Border Grid.Column="1" Background="White" Padding="20">
                 <Grid>
-                     <!--Imagen GIF bienvenida--> 
+                    <!-- Imagen de bienvenida -->
                     <Image x:Name="imgBienvenida"
                            Stretch="Uniform"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            Visibility="Visible"/>
 
-                     <!--Área de contenido dinámico--> 
+                    <!-- Contenedor para vistas internas -->
                     <ContentControl x:Name="MainContent"
                                     Visibility="Collapsed"/>
                 </Grid>

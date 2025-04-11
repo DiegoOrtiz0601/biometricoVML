@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\Diego VML\Documents\Proyectos\SistemaBiometricoWPF\BiomentricoHolding\App.xaml
-121760085379
-2242876090
-52-1786906380
+13-1354891351
+3668295281
+541481382069
 242-1905385757
-Views\Configuracion\BienvenidaInicialWindow.xaml;Views\Configuracion\ConfiguracionControl.xaml;Views\Configuracion\ConfiguracionInicialWindow.xaml;Views\Configuracion\SeleccionEmpresaSedeWindow.xaml;Views\Empleado\CapturaEntradaSalidaWindow.xaml;Views\Empleado\CapturarHuellaWindow.xaml;Views\Empleado\EmpleadoYaExisteDialog.xaml;Views\Empleado\MensajeWindow.xaml;Views\Empleado\MiniLoginWindow.xaml;Views\Empleado\ModificarEmpleado.xaml;Views\Empleado\RegistrarEmpleado.xaml;Views\MainWindow.xaml;
+Views\Configuracion\BienvenidaInicialWindow.xaml;Views\Configuracion\ConfiguracionControl.xaml;Views\Configuracion\ConfiguracionInicialWindow.xaml;Views\Configuracion\SeleccionEmpresaSedeWindow.xaml;Views\Empleado\CapturaEntradaSalidaWindow.xaml;Views\Empleado\CapturarHuellaWindow.xaml;Views\Empleado\EmpleadoYaExisteDialog.xaml;Views\Empleado\MensajeWindow.xaml;Views\Empleado\MiniLoginWindow.xaml;Views\Empleado\ModificarEmpleado.xaml;Views\Empleado\RegistrarEmpleado.xaml;Views\MainWindow.xaml;Views\Reportes\ReportesView.xaml;
 
 False
 

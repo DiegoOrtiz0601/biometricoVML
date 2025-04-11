@@ -1,11 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using BiomentricoHolding.Data.DataBaseRegistro_Test;
+using BiomentricoHolding.Utils;
+using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
-using Microsoft.Win32;
-using BiomentricoHolding.Data.DataBaseRegistro_Test;
-using BiomentricoHolding.Utils;
-using System.Threading.Tasks;
 
 namespace BiomentricoHolding.Views.Configuracion
 {
@@ -109,6 +106,17 @@ namespace BiomentricoHolding.Views.Configuracion
             await Task.Delay(3000); // Espera 3 segundos
 
             ToastContainer.Visibility = Visibility.Collapsed;
+        }
+        private void BtnLimpiarLog_Click(object sender, RoutedEventArgs e)
+        {
+            var resultado = MessageBox.Show("¿Estás seguro que deseas limpiar el log del sistema?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (resultado == MessageBoxResult.Yes)
+            {
+                Logger.Limpiar();
+                MostrarLogEnPantalla();
+                MessageBox.Show("🧹 Log del sistema limpiado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
     }

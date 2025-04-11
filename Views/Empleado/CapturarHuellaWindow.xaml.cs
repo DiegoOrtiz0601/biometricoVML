@@ -1,12 +1,10 @@
-﻿using System;
+﻿using BiomentricoHolding.Services;
+using DPFP;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using BiomentricoHolding.Services;
-using BiomentricoHolding.Views;
-using DPFP;
-using System.Drawing;
 
 namespace BiomentricoHolding.Views.Empleado
 {
@@ -22,17 +20,25 @@ namespace BiomentricoHolding.Views.Empleado
         {
             InitializeComponent();
 
-            capturaService = new CapturaHuellaService
-            {
-                Modo = ModoCaptura.Registro // ✅ Muy importante para que no se active la verificación
-            };
+            capturaService = new CapturaHuellaService();
+
+            // 🛑 Siempre detener captura previa
+            capturaService.DetenerCaptura();
+
+            // ✅ Reestablecer modo correcto
+            capturaService.Modo = ModoCaptura.Registro;
 
             capturaService.Mensaje += MostrarMensajeTexto;
             capturaService.TemplateGenerado += HuellaCapturada;
             capturaService.MuestraProcesadaImagen += DibujarHuella;
             capturaService.IntentoFallido += MostrarFalloYReintentar;
 
-            capturaService.IniciarCaptura();
+            // ✅ Esperar un momento antes de reiniciar
+            Dispatcher.InvokeAsync(async () =>
+            {
+                await Task.Delay(500); // medio segundo
+                capturaService.IniciarCaptura();
+            });
         }
 
         private void MostrarMensajeTexto(string mensaje)

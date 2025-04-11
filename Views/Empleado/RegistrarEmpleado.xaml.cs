@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
+﻿using BiomentricoHolding.Data.DataBaseRegistro_Test;
 using BiomentricoHolding.Services;
-using BiomentricoHolding.Data.DataBaseRegistro_Test;
-using BiomentricoHolding.Views.Empleado;
 using BiomentricoHolding.Utils;
-using System.Windows.Media.Imaging;
 using System.Drawing;
 using System.IO;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace BiomentricoHolding.Views.Empleado
 {
@@ -22,6 +18,7 @@ namespace BiomentricoHolding.Views.Empleado
         public RegistrarEmpleado()
         {
             InitializeComponent();
+            Logger.Agregar("🔄 Abriendo formulario de Registro de Empleado");
             CargarEmpresas();
             CargarTiposEmpleado();
         }
@@ -57,6 +54,8 @@ namespace BiomentricoHolding.Views.Empleado
 
             if (cbEmpresa.SelectedValue is int idEmpresa)
             {
+                Logger.Agregar($"🏢 Empresa seleccionada: ID {idEmpresa}");
+
                 using (var context = AppSettings.GetContextUno())
                 {
                     cbSede.ItemsSource = context.Sedes
@@ -76,6 +75,8 @@ namespace BiomentricoHolding.Views.Empleado
 
             if (cbSede.SelectedValue is int idSede)
             {
+                Logger.Agregar($"📍 Sede seleccionada: ID {idSede}");
+
                 using (var context = AppSettings.GetContextUno())
                 {
                     cbArea.ItemsSource = context.Areas
@@ -134,7 +135,8 @@ namespace BiomentricoHolding.Views.Empleado
 
             if (result == true && modal.Modificar)
             {
-                // Buscar y cargar datos del empleado en el formulario
+                Logger.Agregar($"✏️ Usuario con cédula {cedulaTexto} desea modificar datos.");
+
                 if (int.TryParse(cedulaTexto, out int cedula))
                 {
                     using (var context = AppSettings.GetContextUno())
@@ -142,38 +144,31 @@ namespace BiomentricoHolding.Views.Empleado
                         var empleado = context.Empleados.FirstOrDefault(e => e.Documento == cedula);
                         if (empleado != null)
                         {
-                            // ✅ Activar modo edición
                             esModificacion = true;
                             idEmpleadoActual = empleado.IdEmpleado;
 
-                            // ✅ Cambiar texto del formulario
                             txtTituloFormulario.Text = "✏️ Actualización de Empleado";
                             btnRegistrar.Content = "💾 Actualizar";
 
-                            // Cargar datos en el formulario
                             txtNombres.Text = empleado.Nombres;
                             txtApellidos.Text = empleado.Apellidos;
                             txtCedula.Text = empleado.Documento.ToString();
                             cbEmpresa.SelectedValue = empleado.IdEmpresa;
                             cbTipoEmpleado.SelectedValue = empleado.IdTipoEmpleado;
 
-                            cbEmpresa_SelectionChanged(null, null); // Refresca sedes
+                            cbEmpresa_SelectionChanged(null, null);
                             cbSede.SelectedValue = empleado.IdSede;
 
-                            cbSede_SelectionChanged(null, null); // Refresca áreas
+                            cbSede_SelectionChanged(null, null);
                             cbArea.SelectedValue = empleado.IdArea;
 
-                            // Cargar huella desde la BD
                             if (empleado.Huella != null)
                             {
-                                _huellaCapturada = new DPFP.Template(new System.IO.MemoryStream(empleado.Huella));
-
-                                //var msgHuella = new MensajeWindow("✅ Huella cargada del sistema.", 1); // mensaje por 3 segundos
-                                //msgHuella.ShowDialog();
+                                _huellaCapturada = new DPFP.Template(new MemoryStream(empleado.Huella));
+                                Logger.Agregar("🧬 Huella digital cargada desde base de datos");
                             }
 
-                            //var msgMod = new MensajeWindow("👤 Empleado cargado para modificación.", 1);
-                            //msgMod.ShowDialog();
+                            Logger.Agregar($"📄 Datos cargados para modificar empleado ID: {empleado.IdEmpleado}");
                         }
                     }
                 }
@@ -182,6 +177,8 @@ namespace BiomentricoHolding.Views.Empleado
 
         private void BtnRegistrar_Click(object sender, RoutedEventArgs e)
         {
+            Logger.Agregar("📥 Botón Registrar presionado");
+
             if (string.IsNullOrWhiteSpace(txtNombres.Text) ||
                 string.IsNullOrWhiteSpace(txtApellidos.Text) ||
                 string.IsNullOrWhiteSpace(txtCedula.Text) ||
@@ -190,12 +187,14 @@ namespace BiomentricoHolding.Views.Empleado
                 cbArea.SelectedItem == null ||
                 cbTipoEmpleado.SelectedItem == null)
             {
+                Logger.Agregar("⚠️ Validación fallida: campos obligatorios vacíos.");
                 new MensajeWindow("⚠️ Todos los campos son obligatorios.").ShowDialog();
                 return;
             }
 
             if (_huellaCapturada == null)
             {
+                Logger.Agregar("🛑 Intento de registrar sin capturar huella");
                 new MensajeWindow("🛑 Debes capturar la huella antes de registrar al empleado.").ShowDialog();
                 return;
             }
@@ -209,7 +208,6 @@ namespace BiomentricoHolding.Views.Empleado
                 {
                     if (esModificacion && idEmpleadoActual > 0)
                     {
-                        // 🔄 MODIFICAR EMPLEADO
                         var empleado = context.Empleados.FirstOrDefault(e => e.IdEmpleado == idEmpleadoActual);
                         if (empleado != null)
                         {
@@ -225,6 +223,7 @@ namespace BiomentricoHolding.Views.Empleado
 
                             context.SaveChanges();
 
+                            Logger.Agregar($"📝 Empleado actualizado correctamente: {empleado.Nombres} {empleado.Apellidos} ({empleado.Documento})");
                             new MensajeWindow("✅ Empleado actualizado correctamente.").ShowDialog();
 
                             esModificacion = false;
@@ -233,12 +232,12 @@ namespace BiomentricoHolding.Views.Empleado
                         }
                         else
                         {
+                            Logger.Agregar("❌ Error: No se encontró el empleado para modificar.");
                             new MensajeWindow("❌ No se encontró el empleado para modificar.").ShowDialog();
                         }
                     }
                     else
                     {
-                        // ➕ REGISTRAR NUEVO EMPLEADO
                         var nuevoEmpleado = new BiomentricoHolding.Data.DataBaseRegistro_Test.Empleado
                         {
                             Documento = cedula,
@@ -256,6 +255,8 @@ namespace BiomentricoHolding.Views.Empleado
                         context.Empleados.Add(nuevoEmpleado);
                         context.SaveChanges();
 
+                        Logger.Agregar($"🆕 Empleado registrado: {nuevoEmpleado.Nombres} {nuevoEmpleado.Apellidos} ({nuevoEmpleado.Documento})");
+
                         int idEmpleado = nuevoEmpleado.IdEmpleado;
 
                         for (int dia = 2; dia <= 6; dia++)
@@ -271,6 +272,7 @@ namespace BiomentricoHolding.Views.Empleado
                         }
 
                         context.SaveChanges();
+                        Logger.Agregar("⏱ Horarios asignados por defecto al nuevo empleado");
 
                         var confirmacion = new MensajeWindow("🎉 Empleado registrado correctamente.\n\n¿Deseas agregar otro empleado?", true);
                         bool? resultado = confirmacion.ShowDialog();
@@ -291,37 +293,49 @@ namespace BiomentricoHolding.Views.Empleado
             }
             catch (Exception ex)
             {
+                Logger.Agregar("❌ Error inesperado al guardar empleado: " + ex.Message);
                 new MensajeWindow($"❌ Ocurrió un error inesperado:\n\n{ex.Message}").ShowDialog();
             }
         }
 
-
         private void BtnCapturarHuella_Click(object sender, RoutedEventArgs e)
         {
+            Logger.Agregar("📸 Intentando iniciar captura de huella");
+
+            try
+            {
+                // ⚠️ Asegurarse de que no haya otra sesión de captura activa
+                var detener = new CapturaHuellaService(); // instancia temporal
+                detener.DetenerCaptura();
+            }
+            catch (Exception ex)
+            {
+                Logger.Agregar("⚠ No se pudo detener correctamente una captura previa: " + ex.Message);
+            }
+
             var ventanaCaptura = new CapturarHuellaWindow();
             bool? resultado = ventanaCaptura.ShowDialog();
 
             if (resultado == true)
             {
                 var template = ventanaCaptura.ResultadoTemplate;
-                var imagenHuella = ventanaCaptura.UltimaHuellaCapturada; // ✅ La imagen como ImageSource
+                var imagenHuella = ventanaCaptura.UltimaHuellaCapturada;
 
                 if (template != null && imagenHuella != null)
                 {
                     _huellaCapturada = template;
-
                     imgHuella.Source = imagenHuella;
                     imgHuella.Visibility = Visibility.Visible;
-                    imgHuellaBorder.Visibility = Visibility.Visible; // ✅ Muestra el borde si lo agregaste
+                    imgHuellaBorder.Visibility = Visibility.Visible;
 
-                    var msg = new MensajeWindow("✅ Huella capturada correctamente.");
-                    msg.ShowDialog();
+                    Logger.Agregar("✅ Huella capturada correctamente");
+                    new MensajeWindow("✅ Huella capturada correctamente.").ShowDialog();
                 }
             }
             else
             {
-                var msg = new MensajeWindow("❌ La captura fue cancelada.");
-                msg.ShowDialog();
+                Logger.Agregar("❌ Captura de huella cancelada por el usuario");
+                new MensajeWindow("❌ La captura fue cancelada.").ShowDialog();
             }
         }
 
@@ -337,15 +351,16 @@ namespace BiomentricoHolding.Views.Empleado
             cbTipoEmpleado.SelectedIndex = -1;
             _huellaCapturada = null;
             iconCedulaCheck.Visibility = Visibility.Collapsed;
+            Logger.Agregar("🧹 Formulario de empleado limpiado");
         }
+
         private void BtnVolver_Click(object sender, RoutedEventArgs e)
         {
+            Logger.Agregar("↩️ Usuario volvió a la pantalla principal desde RegistroEmpleado");
             Window mainWindow = Application.Current.MainWindow;
             if (mainWindow != null && mainWindow.FindName("MainContent") is ContentControl contenedor)
             {
                 contenedor.Content = null;
-
-                // ✅ Mostrar el GIF si estamos en el MainWindow
                 if (mainWindow is MainWindow ventanaPrincipal)
                 {
                     ventanaPrincipal.MostrarGifBienvenida();
@@ -364,11 +379,6 @@ namespace BiomentricoHolding.Views.Empleado
                 bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
                 bitmapImage.StreamSource = memory;
                 bitmapImage.EndInit();
-                txtTituloFormulario.Text = "📋 Registro de Empleado";
-                btnRegistrar.Content = "✅ Registrar";
-                esModificacion = false;
-                idEmpleadoActual = 0;
-
                 return bitmapImage;
             }
         }

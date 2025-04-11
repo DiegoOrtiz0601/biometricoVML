@@ -1,17 +1,102 @@
-[19:09:35] 📡 Iniciando módulo de verificación de huella.
-[19:09:38] 🧠 Procesando muestra de huella digital...
-[19:09:40] ❌ Huella no coincide con ningún empleado registrado.
-[19:10:57] 📡 Iniciando módulo de verificación de huella.
-[19:10:59] 🧠 Procesando muestra de huella digital...
-[19:11:01] ❌ Huella no coincide con ningún empleado registrado.
-[19:11:51] 📡 Iniciando módulo de verificación de huella.
-[19:11:54] 🧠 Procesando muestra de huella digital...
-[19:11:56] ❌ Huella no coincide con ningún empleado registrado.
-[19:12:06] 🧠 Procesando muestra de huella digital...
-[19:12:08] ✅ Huella verificada: DIEGO ORTIZ (80550541)
-[19:12:08] ⚠ Sin horario para hoy: DIEGO ORTIZ
-[19:12:28] 🧠 Procesando muestra de huella digital...
-[19:12:30] ❌ Huella no coincide con ningún empleado registrado.
-[19:12:34] 🧠 Procesando muestra de huella digital...
-[19:12:35] ✅ Huella verificada: Prueba Prueba (1075651331)
-[19:12:36] 📝 Novedad registrada para Prueba Prueba a las 19:12:36
+[10:23:40] 📡 Iniciando módulo de verificación de huella.
+[10:52:52] 📡 Iniciando módulo de verificación de huella.
+[10:54:34] 🧠 Procesando muestra de huella digital...
+[10:54:35] ❌ Huella no coincide con ningún empleado registrado.
+[10:54:37] 🧠 Procesando muestra de huella digital...
+[10:54:38] ✅ Huella verificada: Prueba Prueba (1075651331)
+[10:54:45] 🧠 Procesando muestra de huella digital...
+[10:54:47] ❌ Huella no coincide con ningún empleado registrado.
+[10:54:48] 🧠 Procesando muestra de huella digital...
+[10:54:50] ✅ Huella verificada: Prueba Prueba (1075651331)
+[10:54:52] 🧠 Procesando muestra de huella digital...
+[10:54:53] ❌ Huella no coincide con ningún empleado registrado.
+[10:54:55] 🧠 Procesando muestra de huella digital...
+[10:54:56] ❌ Huella no coincide con ningún empleado registrado.
+[10:54:59] 🧠 Procesando muestra de huella digital...
+[10:55:00] ❌ Huella no coincide con ningún empleado registrado.
+[10:55:05] 📡 Iniciando módulo de verificación de huella.
+[10:55:09] 🧠 Procesando muestra de huella digital...
+[10:55:10] ❌ Huella no coincide con ningún empleado registrado.
+[10:55:13] 🧠 Procesando muestra de huella digital...
+[10:55:14] ✅ Huella verificada: Prueba Prueba (1075651331)
+[10:55:29] 🔐 Acceso autorizado a Configuración
+[10:55:29] ✔️ Sede actual cargada: UNICENTRO
+[10:55:53] 📡 Iniciando módulo de verificación de huella.
+[10:56:11] 📡 Iniciando módulo de verificación de huella.
+[10:58:08] 🧠 Procesando muestra de huella digital...
+[10:58:09] ❌ Huella no coincide con ningún empleado registrado.
+[10:58:15] 🧠 Procesando muestra de huella digital...
+[10:58:16] ❌ Huella no coincide con ningún empleado registrado.
+[10:58:19] 🧠 Procesando muestra de huella digital...
+[10:58:20] ❌ Huella no coincide con ningún empleado registrado.
+[10:58:22] 🧠 Procesando muestra de huella digital...
+[10:58:23] ❌ Huella no coincide con ningún empleado registrado.
+[10:58:27] 🧠 Procesando muestra de huella digital...
+[10:58:28] ❌ Huella no coincide con ningún empleado registrado.
+[10:58:30] 🧠 Procesando muestra de huella digital...
+[10:58:31] ✅ Huella verificada: Prueba Prueba (1075651331)
+[10:58:34] 🧠 Procesando muestra de huella digital...
+[10:58:36] ❌ Huella no coincide con ningún empleado registrado.
+[10:58:37] 🧠 Procesando muestra de huella digital...
+[10:58:39] ❌ Huella no coincide con ningún empleado registrado.
+[10:58:41] 🧠 Procesando muestra de huella digital...
+[10:58:42] ❌ Huella no coincide con ningún empleado registrado.
+[10:58:43] 🧠 Procesando muestra de huella digital...
+[10:58:45] ❌ Huella no coincide con ningún empleado registrado.
+[10:58:46] 🧠 Procesando muestra de huella digital...
+[10:58:48] ❌ Huella no coincide con ningún empleado registrado.
+[10:58:49] 🧠 Procesando muestra de huella digital...
+[10:58:51] ❌ Huella no coincide con ningún empleado registrado.
+[10:59:03] 🔄 Abriendo formulario de Registro de Empleado
+[10:59:08] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[10:59:08] 🏢 Empresa seleccionada: ID 9
+[10:59:08] 🏢 Empresa seleccionada: ID 9
+[10:59:08] 📍 Sede seleccionada: ID 13
+[10:59:08] 📍 Sede seleccionada: ID 13
+[10:59:08] 🧬 Huella digital cargada desde base de datos
+[10:59:08] 📄 Datos cargados para modificar empleado ID: 1350
+[10:59:09] 📸 Captura de huella iniciada
+[10:59:12] 🧠 Procesando muestra de huella digital...
+[10:59:13] ❌ Huella no coincide con ningún empleado registrado.
+[10:59:24] 🧠 Procesando muestra de huella digital...
+[10:59:26] ❌ Huella no coincide con ningún empleado registrado.
+[11:01:07] ❌ Captura de huella cancelada por el usuario
+[11:01:15] ↩️ Usuario volvió a la pantalla principal desde RegistroEmpleado
+[11:01:27] 🔄 Abriendo formulario de Registro de Empleado
+[11:01:31] 📸 Captura de huella iniciada
+[11:01:48] ❌ Captura de huella cancelada por el usuario
+[11:01:52] ↩️ Usuario volvió a la pantalla principal desde RegistroEmpleado
+[11:16:22] 📡 Iniciando módulo de verificación de huella.
+[11:16:26] 🧠 Procesando muestra de huella digital...
+[11:16:27] ❌ Huella no coincide con ningún empleado registrado.
+[11:16:29] 🧠 Procesando muestra de huella digital...
+[11:16:30] ✅ Huella verificada: Prueba Prueba (1075651331)
+[11:16:37] 🧠 Procesando muestra de huella digital...
+[11:16:38] ❌ Huella no coincide con ningún empleado registrado.
+[11:16:52] 🔄 Abriendo formulario de Registro de Empleado
+[11:16:57] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[11:16:57] 🏢 Empresa seleccionada: ID 9
+[11:16:57] 🏢 Empresa seleccionada: ID 9
+[11:16:57] 📍 Sede seleccionada: ID 13
+[11:16:57] 📍 Sede seleccionada: ID 13
+[11:16:57] 🧬 Huella digital cargada desde base de datos
+[11:16:57] 📄 Datos cargados para modificar empleado ID: 1350
+[11:16:59] 📸 Intentando iniciar captura de huella
+[11:17:06] ✅ Huella capturada correctamente
+[11:17:07] 📥 Botón Registrar presionado
+[11:17:08] 📝 Empleado actualizado correctamente: DIEGO ARMANDO ORTIZ MORA (80550594)
+[11:17:09] 🧹 Formulario de empleado limpiado
+[11:17:15] 📡 Iniciando módulo de verificación de huella.
+[11:17:17] 🧠 Procesando muestra de huella digital...
+[11:17:18] ✅ Huella verificada: DIEGO ARMANDO ORTIZ MORA (80550594)
+[11:25:34] 📡 Iniciando módulo de verificación de huella.
+[11:25:38] 🧠 Procesando muestra de huella digital...
+[11:25:40] ❌ Huella no coincide con ningún empleado registrado.
+[11:25:44] 🧠 Procesando muestra de huella digital...
+[11:25:45] ✅ Huella verificada: Prueba Prueba (1075651331)
+[11:34:29] 📡 Iniciando módulo de verificación de huella.
+[11:34:51] 🔄 Abriendo formulario de Registro de Empleado
+[11:34:56] 📸 Intentando iniciar captura de huella
+[11:35:03] ❌ Captura de huella cancelada por el usuario
+[11:35:09] ↩️ Usuario volvió a la pantalla principal desde RegistroEmpleado
+[11:35:21] 📡 Iniciando módulo de verificación de huella.

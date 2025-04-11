@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using BiomentricoHolding.Data; // Ajusta esto según dónde esté tu DbContext
-using BiomentricoHolding.Data.DataBaseRegistro_Test; // Namespace donde quedó la clase `Empresa`
+﻿using BiomentricoHolding.Data.DataBaseRegistro_Test; // Namespace donde quedó la clase `Empresa`
 
 namespace BiomentricoHolding.Services
 {

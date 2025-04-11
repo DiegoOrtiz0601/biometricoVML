@@ -1,6 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
-using System.Windows;
-using System.Windows.Media.Animation;
+﻿using System.Windows;
 
 
 namespace BiomentricoHolding.Views.Empleado
@@ -12,7 +10,7 @@ namespace BiomentricoHolding.Views.Empleado
         public MiniLoginWindow()
         {
             InitializeComponent();
-                     
+
         }
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)

@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("appsettings.json")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/huella-dactilar.ico")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/logo.gif")]
 
 

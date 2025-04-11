@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace BiomentricoHolding.Data.dbVMLTalentoHumano;
+﻿namespace BiomentricoHolding.Data.dbVMLTalentoHumano;
 
 public partial class TblTipoEmpleado
 {

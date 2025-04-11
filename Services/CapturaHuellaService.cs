@@ -1,7 +1,6 @@
 ﻿using DPFP;
 using DPFP.Capture;
 using DPFP.Processing;
-using System;
 using System.Drawing;
 
 namespace BiomentricoHolding.Services
@@ -187,6 +186,14 @@ namespace BiomentricoHolding.Services
                 Mensaje?.Invoke("👌 Calidad de huella aceptable.");
             else
                 Mensaje?.Invoke("⚠ Calidad de huella insuficiente.");
+        }
+        public void Reiniciar(ModoCaptura nuevoModo)
+        {
+            DetenerCaptura();
+            Modo = nuevoModo;
+            Enroller?.Clear(); // limpia si es registro
+            primerIntento = true;
+            IniciarCaptura();
         }
     }
 }

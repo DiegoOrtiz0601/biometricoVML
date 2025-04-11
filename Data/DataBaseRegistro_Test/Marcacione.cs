@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace BiomentricoHolding.Data.DataBaseRegistro_Test;
+﻿namespace BiomentricoHolding.Data.DataBaseRegistro_Test;
 
 public partial class Marcacione
 {
