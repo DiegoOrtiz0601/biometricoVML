@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using EmpleadoModel = BiomentricoHolding.Data.DataBaseRegistro_Test.Empleado;
 
 namespace BiomentricoHolding.Views.Empleado
 {
@@ -22,6 +23,8 @@ namespace BiomentricoHolding.Views.Empleado
             CargarEmpresas();
             CargarTiposEmpleado();
         }
+      
+
 
         private void CargarEmpresas()
         {
@@ -174,7 +177,6 @@ namespace BiomentricoHolding.Views.Empleado
                 }
             }
         }
-
         private void BtnRegistrar_Click(object sender, RoutedEventArgs e)
         {
             Logger.Agregar("📥 Botón Registrar presionado");
@@ -187,15 +189,13 @@ namespace BiomentricoHolding.Views.Empleado
                 cbArea.SelectedItem == null ||
                 cbTipoEmpleado.SelectedItem == null)
             {
-                Logger.Agregar("⚠️ Validación fallida: campos obligatorios vacíos.");
                 new MensajeWindow("⚠️ Todos los campos son obligatorios.").ShowDialog();
                 return;
             }
 
             if (_huellaCapturada == null)
             {
-                Logger.Agregar("🛑 Intento de registrar sin capturar huella");
-                new MensajeWindow("🛑 Debes capturar la huella antes de registrar al empleado.").ShowDialog();
+                new MensajeWindow("🛑 Debes capturar la huella antes de continuar.").ShowDialog();
                 return;
             }
 
@@ -206,39 +206,29 @@ namespace BiomentricoHolding.Views.Empleado
 
                 using (var context = AppSettings.GetContextUno())
                 {
+                    EmpleadoModel empleado;
                     if (esModificacion && idEmpleadoActual > 0)
                     {
-                        var empleado = context.Empleados.FirstOrDefault(e => e.IdEmpleado == idEmpleadoActual);
-                        if (empleado != null)
+                        empleado = context.Empleados.FirstOrDefault(e => e.IdEmpleado == idEmpleadoActual);
+                        if (empleado == null)
                         {
-                            empleado.Nombres = txtNombres.Text.Trim();
-                            empleado.Apellidos = txtApellidos.Text.Trim();
-                            empleado.Documento = cedula;
-                            empleado.IdEmpresa = (int)cbEmpresa.SelectedValue;
-                            empleado.IdSede = (int)cbSede.SelectedValue;
-                            empleado.IdArea = (int)cbArea.SelectedValue;
-                            empleado.IdTipoEmpleado = (int)cbTipoEmpleado.SelectedValue;
-                            empleado.Huella = huellaBytes;
-                            empleado.FechaIngreso = DateTime.Now;
-
-                            context.SaveChanges();
-
-                            Logger.Agregar($"📝 Empleado actualizado correctamente: {empleado.Nombres} {empleado.Apellidos} ({empleado.Documento})");
-                            new MensajeWindow("✅ Empleado actualizado correctamente.").ShowDialog();
-
-                            esModificacion = false;
-                            idEmpleadoActual = 0;
-                            LimpiarFormulario();
-                        }
-                        else
-                        {
-                            Logger.Agregar("❌ Error: No se encontró el empleado para modificar.");
                             new MensajeWindow("❌ No se encontró el empleado para modificar.").ShowDialog();
+                            return;
                         }
+
+                        empleado.Nombres = txtNombres.Text.Trim();
+                        empleado.Apellidos = txtApellidos.Text.Trim();
+                        empleado.Documento = cedula;
+                        empleado.IdEmpresa = (int)cbEmpresa.SelectedValue;
+                        empleado.IdSede = (int)cbSede.SelectedValue;
+                        empleado.IdArea = (int)cbArea.SelectedValue;
+                        empleado.IdTipoEmpleado = (int)cbTipoEmpleado.SelectedValue;
+                        empleado.Huella = huellaBytes;
+                        empleado.FechaIngreso = DateTime.Now;
                     }
                     else
                     {
-                        var nuevoEmpleado = new BiomentricoHolding.Data.DataBaseRegistro_Test.Empleado
+                        empleado = new EmpleadoModel
                         {
                             Documento = cedula,
                             Nombres = txtNombres.Text.Trim(),
@@ -252,32 +242,151 @@ namespace BiomentricoHolding.Views.Empleado
                             FechaIngreso = DateTime.Now
                         };
 
-                        context.Empleados.Add(nuevoEmpleado);
+                        context.Empleados.Add(empleado);
+                        context.SaveChanges(); // Necesario para obtener el ID
+                        idEmpleadoActual = empleado.IdEmpleado;
+                    }
+
+
+                    context.SaveChanges();
+
+                    int idEmpleado = empleado.IdEmpleado;
+                    int idTipoEmpleado = (int)cbTipoEmpleado.SelectedValue;
+                    string nombreTipoEmpleado = context.TiposEmpleados
+                        .Where(t => t.Id == idTipoEmpleado)
+                        .Select(t => t.Nombre)
+                        .FirstOrDefault() ?? "";
+
+                    bool esRotativo = nombreTipoEmpleado.Trim().ToLower() == "enrolado rotativo";
+
+                    var asignacionExistente = context.AsignacionHorarios
+                        .FirstOrDefault(a => a.IdEmpleado == idEmpleado && a.Estado == true);
+
+                    bool usarHorarioEspecifico = false;
+
+                    if (asignacionExistente != null)
+                    {
+                        string mensaje = esRotativo
+                            ? "Ya existe un horario activo. ¿Deseas reemplazarlo por un horario específico o mantener el actual?"
+                            : "Ya existe un horario activo. ¿Deseas reemplazarlo por un horario genérico o mantener el actual?";
+
+                        var decision = new MensajeWindow(mensaje, true, "Reemplazar", "Mantener");
+                        bool? resultado = decision.ShowDialog();
+
+                        if (resultado == true && decision.Resultado)
+                        {
+                            asignacionExistente.Estado = false;
+                            usarHorarioEspecifico = esRotativo;
+                        }
+                        else
+                        {
+                            Logger.Agregar("⏸ Se decidió mantener el horario actual. El empleado fue actualizado sin modificar la asignación.");
+                            FinalizarGuardado(esModificacion); // Guarda los cambios del empleado
+                            return;
+                        }
+                    }
+
+                
+                    else
+                    {
+                        string mensaje = esRotativo
+                            ? "¿Deseas crear un horario específico para este colaborador?"
+                            : "¿Deseas crear un horario genérico para este colaborador?";
+
+                        var decision = new MensajeWindow(mensaje, true);
+                        var resultado = decision.ShowDialog();
+
+                        if (decision.Resultado)
+                        {
+                            usarHorarioEspecifico = esRotativo;
+                        }
+                        else
+                        {
+                            Logger.Agregar("🚫 El usuario canceló la creación de asignación de horario.");
+                            return;
+                        }
+                    }
+
+                    if (usarHorarioEspecifico)
+                    {
+                        var ventana = new AsignarHorarioWindow();
+                        bool? respuesta = ventana.ShowDialog();
+
+                        if (respuesta == true)
+                        {
+                            var asignacion = new AsignacionHorario
+                            {
+                                IdEmpleado = idEmpleado,
+                                FechaInicio = DateOnly.FromDateTime(DateTime.Today),
+                                FechaFin = DateOnly.FromDateTime(new DateTime(DateTime.Today.Year, 12, 31)),
+                                FechaCreacion = DateTime.Now,
+                                CreadoPor = 3, // Reemplazar con ID real
+                                Estado = true,
+                                TipoHorario = 2
+                            };
+
+                            context.AsignacionHorarios.Add(asignacion);
+                            context.SaveChanges();
+
+                            foreach (var dia in ventana.HorariosAsignados)
+                            {
+                                var detalle = new DetalleHorario
+                                {
+                                    IdAsignacion = asignacion.Id,
+                                    DiaSemana = dia.Key,
+                                    HoraInicio = TimeOnly.FromTimeSpan(dia.Value.Inicio),
+                                    HoraFin = TimeOnly.FromTimeSpan(dia.Value.Fin)
+                                };
+                                context.DetalleHorarios.Add(detalle);
+                            }
+
+                            context.SaveChanges();
+                            Logger.Agregar("📅 Horario específico asignado.");
+                        }
+                        else
+                        {
+                            Logger.Agregar("⛔ Usuario canceló la asignación de horario específico.");
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        var asignacion = new AsignacionHorario
+                        {
+                            IdEmpleado = idEmpleado,
+                            FechaInicio = DateOnly.FromDateTime(DateTime.Today),
+                            FechaFin = DateOnly.FromDateTime(new DateTime(DateTime.Today.Year, 12, 31)),
+                            FechaCreacion = DateTime.Now,
+                            CreadoPor = 3,
+                            Estado = true,
+                            TipoHorario = 1
+                        };
+
+                        context.AsignacionHorarios.Add(asignacion);
                         context.SaveChanges();
 
-                        Logger.Agregar($"🆕 Empleado registrado: {nuevoEmpleado.Nombres} {nuevoEmpleado.Apellidos} ({nuevoEmpleado.Documento})");
-
-                        int idEmpleado = nuevoEmpleado.IdEmpleado;
-
-                        for (int dia = 2; dia <= 6; dia++)
+                        for (int dia = 1; dia <= 7; dia++)
                         {
-                            context.EmpleadosHorarios.Add(new EmpleadosHorario
+                            context.DetalleHorarios.Add(new DetalleHorario
                             {
-                                EmpleadoId = idEmpleado,
+                                IdAsignacion = asignacion.Id,
                                 DiaSemana = dia,
-                                Inicio = TimeOnly.Parse("07:00:00"),
-                                Fin = (dia == 5 || dia == 6) ? TimeOnly.Parse("16:30:00") : TimeOnly.Parse("17:30:00"),
-                                Estado = true
+                                HoraInicio = TimeOnly.Parse("07:00:00"),
+                                HoraFin = (dia == 5 || dia == 6) ? TimeOnly.Parse("16:30:00") : TimeOnly.Parse("17:30:00")
                             });
                         }
 
                         context.SaveChanges();
-                        Logger.Agregar("⏱ Horarios asignados por defecto al nuevo empleado");
+                        Logger.Agregar("🕒 Horario genérico asignado.");
+                    }
 
-                        var confirmacion = new MensajeWindow("🎉 Empleado registrado correctamente.\n\n¿Deseas agregar otro empleado?", true);
-                        bool? resultado = confirmacion.ShowDialog();
+                    string mensajeFinal = esModificacion ? "Empleado actualizado correctamente." : "Empleado registrado correctamente.";
+                    new MensajeWindow($"✅ {mensajeFinal}").ShowDialog();
 
-                        if (resultado == true)
+                    if (!esModificacion)
+                    {
+                        var confirmacion = new MensajeWindow("¿Deseas agregar otro empleado?", true);
+                        if (confirmacion.ShowDialog() == true)
                         {
                             LimpiarFormulario();
                         }
@@ -289,14 +398,48 @@ namespace BiomentricoHolding.Views.Empleado
                             }
                         }
                     }
+
+                    esModificacion = false;
+                    idEmpleadoActual = 0;
+                    LimpiarFormulario();
                 }
             }
             catch (Exception ex)
             {
-                Logger.Agregar("❌ Error inesperado al guardar empleado: " + ex.Message);
-                new MensajeWindow($"❌ Ocurrió un error inesperado:\n\n{ex.Message}").ShowDialog();
+                Logger.Agregar($"❌ Error inesperado: {ex.Message}");
+                new MensajeWindow($"❌ Ocurrió un error:\n{ex.Message}").ShowDialog();
             }
         }
+
+        private void FinalizarGuardado(bool fueModificacion)
+        {
+            string mensajeFinal = fueModificacion ? "Empleado actualizado correctamente." : "Empleado registrado correctamente.";
+            new MensajeWindow($"✅ {mensajeFinal}").ShowDialog();
+
+            if (!fueModificacion)
+            {
+                var confirmacion = new MensajeWindow("¿Deseas agregar otro empleado?", true);
+                if (confirmacion.ShowDialog() == true)
+                {
+                    LimpiarFormulario();
+                }
+                else
+                {
+                    if (Application.Current.MainWindow.FindName("MainContent") is ContentControl contenedor)
+                    {
+                        contenedor.Content = null;
+                    }
+                }
+            }
+
+            esModificacion = false;
+            idEmpleadoActual = 0;
+            LimpiarFormulario();
+        }
+
+
+
+
 
         private void BtnCapturarHuella_Click(object sender, RoutedEventArgs e)
         {

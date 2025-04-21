@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BiomentricoHolding")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e8c87865a7d9c759b0cc5d488b4a051bbeb48d6c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2342145fda80d081b409f4108a03eb56beb48e71")]
 [assembly: System.Reflection.AssemblyProductAttribute("BiomentricoHolding")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BiomentricoHolding")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

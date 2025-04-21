@@ -100,3 +100,376 @@
 [11:35:03] ❌ Captura de huella cancelada por el usuario
 [11:35:09] ↩️ Usuario volvió a la pantalla principal desde RegistroEmpleado
 [11:35:21] 📡 Iniciando módulo de verificación de huella.
+[23:04:03] 🔄 Abriendo formulario de Registro de Empleado
+[23:07:27] 🏢 Empresa seleccionada: ID 3
+[23:07:28] 📍 Sede seleccionada: ID 4
+[23:07:32] 📸 Intentando iniciar captura de huella
+[23:07:45] ✅ Huella capturada correctamente
+[23:07:48] 📥 Botón Registrar presionado
+[23:07:48] 🆕 Empleado y horarios registrados correctamente
+[23:07:55] 📡 Iniciando módulo de verificación de huella.
+[23:08:05] 📡 Iniciando módulo de verificación de huella.
+[23:37:42] 🔄 Abriendo formulario de Registro de Empleado
+[23:38:12] 🏢 Empresa seleccionada: ID 12
+[23:38:14] 📍 Sede seleccionada: ID 136
+[23:38:18] 📸 Intentando iniciar captura de huella
+[23:38:29] ✅ Huella capturada correctamente
+[23:38:31] 📥 Botón Registrar presionado
+[23:38:33] 🚫 El usuario canceló la creación de asignación de horario.
+[23:38:36] 📥 Botón Registrar presionado
+[23:38:40] 🆕 Empleado y horarios registrados correctamente
+[23:41:08] 🔄 Abriendo formulario de Registro de Empleado
+[23:41:25] 🏢 Empresa seleccionada: ID 10
+[23:41:25] 🏢 Empresa seleccionada: ID 16
+[23:41:26] 📍 Sede seleccionada: ID 134
+[23:41:26] 📍 Sede seleccionada: ID 145
+[23:41:29] 📸 Intentando iniciar captura de huella
+[23:41:38] ✅ Huella capturada correctamente
+[23:41:40] 📥 Botón Registrar presionado
+[23:41:43] 🚫 El usuario canceló la creación de asignación de horario.
+[23:42:47] 📥 Botón Registrar presionado
+[23:42:51] 🚫 El usuario canceló la creación de asignación de horario.
+[23:43:00] 📥 Botón Registrar presionado
+[23:43:02] 🚫 El usuario canceló la creación de asignación de horario.
+[23:44:00] 📥 Botón Registrar presionado
+[23:44:06] 🚫 El usuario canceló la creación de asignación de horario.
+[23:44:09] 📥 Botón Registrar presionado
+[23:44:11] 🚫 El usuario canceló la creación de asignación de horario.
+[00:24:18] 🔄 Abriendo formulario de Registro de Empleado
+[00:24:43] 🏢 Empresa seleccionada: ID 5
+[00:24:44] 📍 Sede seleccionada: ID 70
+[00:24:48] 📸 Intentando iniciar captura de huella
+[00:25:01] ✅ Huella capturada correctamente
+[00:25:04] 📥 Botón Registrar presionado
+[00:25:07] 🚫 El usuario canceló la creación de asignación de horario.
+[00:26:32] ↩️ Usuario volvió a la pantalla principal desde RegistroEmpleado
+[00:55:50] 🔄 Abriendo formulario de Registro de Empleado
+[00:56:12] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[00:56:12] 🏢 Empresa seleccionada: ID 9
+[00:56:12] 🏢 Empresa seleccionada: ID 9
+[00:56:12] 📍 Sede seleccionada: ID 13
+[00:56:12] 📍 Sede seleccionada: ID 13
+[00:56:12] 🧬 Huella digital cargada desde base de datos
+[00:56:12] 📄 Datos cargados para modificar empleado ID: 1350
+[00:56:18] 📥 Botón Registrar presionado
+[00:56:20] 🚫 El usuario canceló la creación de asignación de horario.
+[00:58:04] ↩️ Usuario volvió a la pantalla principal desde RegistroEmpleado
+[01:02:14] 🔄 Abriendo formulario de Registro de Empleado
+[01:02:24] 🏢 Empresa seleccionada: ID 5
+[01:02:25] 📍 Sede seleccionada: ID 88
+[01:02:29] 📸 Intentando iniciar captura de huella
+[01:02:41] ✅ Huella capturada correctamente
+[01:02:42] 📥 Botón Registrar presionado
+[01:02:44] 🚫 El usuario canceló la creación de asignación de horario.
+[01:02:46] 📥 Botón Registrar presionado
+[01:02:47] 🚫 El usuario canceló la creación de asignación de horario.
+[07:55:58] 🔄 Abriendo formulario de Registro de Empleado
+[07:56:03] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[07:56:03] 🏢 Empresa seleccionada: ID 9
+[07:56:03] 🏢 Empresa seleccionada: ID 9
+[07:56:03] 📍 Sede seleccionada: ID 13
+[07:56:03] 📍 Sede seleccionada: ID 13
+[07:56:03] 🧬 Huella digital cargada desde base de datos
+[07:56:03] 📄 Datos cargados para modificar empleado ID: 1350
+[07:56:12] 🏢 Empresa seleccionada: ID 3
+[07:56:12] 📥 Botón Registrar presionado
+[07:56:12] ⚠️ Validación fallida: campos obligatorios vacíos.
+[07:56:15] 📍 Sede seleccionada: ID 4
+[07:56:18] 📥 Botón Registrar presionado
+[07:56:22] ⏱ Horario genérico asignado.
+[07:56:22] ✅ Empleado actualizado correctamente. ID: 1350
+[08:27:40] 📥 Botón Registrar presionado
+[08:27:43] 🚫 El usuario canceló la creación de asignación de horario.
+[08:27:45] 📥 Botón Registrar presionado
+[08:38:37] 🚫 El usuario canceló la creación de asignación de horario.
+[08:38:43] 📥 Botón Registrar presionado
+[08:38:46] ⏱ Horario genérico asignado.
+[08:38:46] ✅ Empleado registrado correctamente. ID: 1367
+[08:38:48] 🧹 Formulario de empleado limpiado
+[08:38:54] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[08:38:54] 🏢 Empresa seleccionada: ID 3
+[08:38:54] 🏢 Empresa seleccionada: ID 3
+[08:38:54] 📍 Sede seleccionada: ID 4
+[08:38:54] 📍 Sede seleccionada: ID 4
+[08:38:54] 🧬 Huella digital cargada desde base de datos
+[08:38:54] 📄 Datos cargados para modificar empleado ID: 1350
+[08:38:57] 📥 Botón Registrar presionado
+[08:39:10] ⏱ Horario genérico asignado.
+[08:39:10] ✅ Empleado actualizado correctamente. ID: 1350
+[08:39:16] 📥 Botón Registrar presionado
+[08:39:18] 🚫 El usuario canceló la creación de asignación de horario.
+[08:39:22] 📥 Botón Registrar presionado
+[08:39:24] 🚫 El usuario canceló la creación de asignación de horario.
+[08:39:26] 📥 Botón Registrar presionado
+[08:39:29] ⏱ Horario genérico asignado.
+[08:39:29] ✅ Empleado registrado correctamente. ID: 1370
+[08:39:32] 🧹 Formulario de empleado limpiado
+[08:39:37] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[08:39:37] 🏢 Empresa seleccionada: ID 3
+[08:39:37] 🏢 Empresa seleccionada: ID 3
+[08:39:37] 📍 Sede seleccionada: ID 4
+[08:39:37] 📍 Sede seleccionada: ID 4
+[08:39:37] 🧬 Huella digital cargada desde base de datos
+[08:39:37] 📄 Datos cargados para modificar empleado ID: 1350
+[08:39:38] 📥 Botón Registrar presionado
+[08:39:50] ⏱ Horario genérico asignado.
+[08:39:50] ✅ Empleado actualizado correctamente. ID: 1350
+[08:39:55] 📥 Botón Registrar presionado
+[08:39:57] ⏱ Horario genérico asignado.
+[08:39:57] ✅ Empleado registrado correctamente. ID: 1371
+[08:39:59] 🧹 Formulario de empleado limpiado
+[08:40:03] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[08:40:03] 🏢 Empresa seleccionada: ID 3
+[08:40:03] 🏢 Empresa seleccionada: ID 3
+[08:40:03] 📍 Sede seleccionada: ID 4
+[08:40:03] 📍 Sede seleccionada: ID 4
+[08:40:03] 🧬 Huella digital cargada desde base de datos
+[08:40:03] 📄 Datos cargados para modificar empleado ID: 1350
+[08:40:07] 📥 Botón Registrar presionado
+[08:40:15] ⏱ Horario genérico asignado.
+[08:40:15] ✅ Empleado actualizado correctamente. ID: 1350
+[08:40:35] ↩️ Usuario volvió a la pantalla principal desde RegistroEmpleado
+[08:43:36] 🔄 Abriendo formulario de Registro de Empleado
+[08:50:02] 🔄 Abriendo formulario de Registro de Empleado
+[08:52:02] 🔄 Abriendo formulario de Registro de Empleado
+[08:52:07] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[08:52:07] 🏢 Empresa seleccionada: ID 3
+[08:52:07] 🏢 Empresa seleccionada: ID 3
+[08:52:07] 📍 Sede seleccionada: ID 4
+[08:52:07] 📍 Sede seleccionada: ID 4
+[08:52:07] 🧬 Huella digital cargada desde base de datos
+[08:52:07] 📄 Datos cargados para modificar empleado ID: 1350
+[08:52:11] 📥 Botón Registrar presionado
+[08:52:18] ⏸ Se decidió mantener el horario actual.
+[08:52:19] 📥 Botón Registrar presionado
+[08:52:23] ⏱ Horario genérico asignado.
+[08:52:23] ✅ Empleado actualizado correctamente. ID: 1350
+[08:52:33] 📥 Botón Registrar presionado
+[08:52:36] ⏱ Horario genérico asignado.
+[08:52:36] ✅ Empleado registrado correctamente. ID: 1372
+[08:52:39] 🧹 Formulario de empleado limpiado
+[08:53:07] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[08:53:07] 🏢 Empresa seleccionada: ID 3
+[08:53:07] 🏢 Empresa seleccionada: ID 3
+[08:53:07] 📍 Sede seleccionada: ID 4
+[08:53:07] 📍 Sede seleccionada: ID 4
+[08:53:07] 🧬 Huella digital cargada desde base de datos
+[08:53:07] 📄 Datos cargados para modificar empleado ID: 1350
+[08:58:14] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[08:58:14] 🏢 Empresa seleccionada: ID 3
+[08:58:14] 📍 Sede seleccionada: ID 4
+[08:58:14] 📍 Sede seleccionada: ID 4
+[08:58:15] 🧬 Huella digital cargada desde base de datos
+[08:58:15] 📄 Datos cargados para modificar empleado ID: 1350
+[08:58:29] 📥 Botón Registrar presionado
+[08:58:31] ⏱ Horario genérico asignado.
+[08:58:31] ✅ Empleado actualizado correctamente. ID: 1350
+[08:58:33] 📥 Botón Registrar presionado
+[08:58:34] ⏱ Horario genérico asignado.
+[08:58:34] ✅ Empleado registrado correctamente. ID: 1373
+[09:30:17] 🔄 Abriendo formulario de Registro de Empleado
+[09:30:23] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[09:30:23] 🏢 Empresa seleccionada: ID 3
+[09:30:23] 🏢 Empresa seleccionada: ID 3
+[09:30:23] 📍 Sede seleccionada: ID 4
+[09:30:23] 📍 Sede seleccionada: ID 4
+[09:30:23] 🧬 Huella digital cargada desde base de datos
+[09:30:23] 📄 Datos cargados para modificar empleado ID: 1350
+[09:30:42] 📥 Botón Registrar presionado
+[09:30:46] 🕒 Horario genérico asignado.
+[09:38:09] 📥 Botón Registrar presionado
+[09:40:43] 🚫 El usuario canceló la creación de asignación de horario.
+[09:40:44] ↩️ Usuario volvió a la pantalla principal desde RegistroEmpleado
+[09:41:07] 🔄 Abriendo formulario de Registro de Empleado
+[09:41:30] 🏢 Empresa seleccionada: ID 21
+[09:41:33] 🏢 Empresa seleccionada: ID 3
+[09:41:34] 📍 Sede seleccionada: ID 4
+[09:41:40] 📸 Intentando iniciar captura de huella
+[09:41:52] ✅ Huella capturada correctamente
+[09:41:54] 📥 Botón Registrar presionado
+[09:43:57] 📅 Horario específico asignado.
+[09:46:04] 🔄 Abriendo formulario de Registro de Empleado
+[09:46:29] ✏️ Usuario con cédula 1231231 desea modificar datos.
+[09:46:29] 🏢 Empresa seleccionada: ID 3
+[09:46:29] 🏢 Empresa seleccionada: ID 3
+[09:46:29] 📍 Sede seleccionada: ID 4
+[09:46:29] 📍 Sede seleccionada: ID 4
+[09:46:29] 🧬 Huella digital cargada desde base de datos
+[09:46:29] 📄 Datos cargados para modificar empleado ID: 1375
+[09:46:35] 📥 Botón Registrar presionado
+[09:46:56] ⛔ Usuario canceló la asignación de horario específico.
+[09:46:57] 📥 Botón Registrar presionado
+[09:46:58] ⏸ Se decidió mantener el horario actual.
+[09:47:00] 📥 Botón Registrar presionado
+[09:47:01] ⏸ Se decidió mantener el horario actual.
+[09:47:02] 📥 Botón Registrar presionado
+[09:49:09] ⏸ Se decidió mantener el horario actual.
+[09:49:13] 📥 Botón Registrar presionado
+[09:49:16] 🕒 Horario genérico asignado.
+[09:49:19] 📥 Botón Registrar presionado
+[09:49:23] 🕒 Horario genérico asignado.
+[09:52:32] 🔄 Abriendo formulario de Registro de Empleado
+[09:52:38] ✏️ Usuario con cédula 1231231 desea modificar datos.
+[09:52:38] 🏢 Empresa seleccionada: ID 3
+[09:52:39] 🏢 Empresa seleccionada: ID 3
+[09:52:39] 📍 Sede seleccionada: ID 4
+[09:52:39] 📍 Sede seleccionada: ID 4
+[09:52:39] 🧬 Huella digital cargada desde base de datos
+[09:52:39] 📄 Datos cargados para modificar empleado ID: 1375
+[09:52:46] 📥 Botón Registrar presionado
+[09:52:57] ⏸ Se decidió mantener el horario actual.
+[09:57:01] ↩️ Usuario volvió a la pantalla principal desde RegistroEmpleado
+[10:41:04] 🔄 Abriendo formulario de Registro de Empleado
+[10:41:09] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[10:41:09] 🏢 Empresa seleccionada: ID 3
+[10:41:09] 🏢 Empresa seleccionada: ID 3
+[10:41:09] 📍 Sede seleccionada: ID 4
+[10:41:09] 📍 Sede seleccionada: ID 4
+[10:41:09] 🧬 Huella digital cargada desde base de datos
+[10:41:09] 📄 Datos cargados para modificar empleado ID: 1350
+[10:41:20] 📥 Botón Registrar presionado
+[10:41:27] ⏸ Se decidió mantener el horario actual.
+[10:41:29] 📥 Botón Registrar presionado
+[10:41:29] ⏸ Se decidió mantener el horario actual.
+[10:41:30] 📥 Botón Registrar presionado
+[10:41:33] ⛔ Usuario canceló la asignación de horario específico.
+[10:41:34] 📥 Botón Registrar presionado
+[10:41:34] ⏸ Se decidió mantener el horario actual.
+[11:10:50] 🔄 Abriendo formulario de Registro de Empleado
+[11:10:55] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[11:10:55] 🏢 Empresa seleccionada: ID 3
+[11:10:55] 🏢 Empresa seleccionada: ID 3
+[11:10:55] 📍 Sede seleccionada: ID 4
+[11:10:55] 📍 Sede seleccionada: ID 4
+[11:10:55] 🧬 Huella digital cargada desde base de datos
+[11:10:55] 📄 Datos cargados para modificar empleado ID: 1350
+[11:11:03] 📥 Botón Registrar presionado
+[11:11:09] ⏸ Se decidió mantener el horario actual. El empleado fue actualizado sin modificar la asignación.
+[11:16:06] ↩️ Usuario volvió a la pantalla principal desde RegistroEmpleado
+[11:18:02] 🔄 Abriendo formulario de Registro de Empleado
+[11:18:07] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[11:18:07] 🏢 Empresa seleccionada: ID 3
+[11:18:07] 🏢 Empresa seleccionada: ID 3
+[11:18:07] 📍 Sede seleccionada: ID 4
+[11:18:07] 📍 Sede seleccionada: ID 4
+[11:18:07] 🧬 Huella digital cargada desde base de datos
+[11:18:07] 📄 Datos cargados para modificar empleado ID: 1350
+[11:18:11] 📥 Botón Registrar presionado
+[11:18:15] ⏸ Se decidió mantener el horario actual. El empleado fue actualizado sin modificar la asignación.
+[11:18:36] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[11:18:36] 🏢 Empresa seleccionada: ID 3
+[11:18:36] 📍 Sede seleccionada: ID 4
+[11:18:36] 📍 Sede seleccionada: ID 4
+[11:18:36] 🧬 Huella digital cargada desde base de datos
+[11:18:36] 📄 Datos cargados para modificar empleado ID: 1350
+[11:18:41] 📥 Botón Registrar presionado
+[11:18:43] ⏸ Se decidió mantener el horario actual. El empleado fue actualizado sin modificar la asignación.
+[11:19:05] ↩️ Usuario volvió a la pantalla principal desde RegistroEmpleado
+[11:19:21] 🔄 Abriendo formulario de Registro de Empleado
+[11:19:26] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[11:19:26] 🏢 Empresa seleccionada: ID 3
+[11:19:26] 🏢 Empresa seleccionada: ID 3
+[11:19:26] 📍 Sede seleccionada: ID 4
+[11:19:26] 📍 Sede seleccionada: ID 4
+[11:19:26] 🧬 Huella digital cargada desde base de datos
+[11:19:26] 📄 Datos cargados para modificar empleado ID: 1350
+[11:19:29] 📥 Botón Registrar presionado
+[11:19:31] ⏸ Se decidió mantener el horario actual. El empleado fue actualizado sin modificar la asignación.
+[11:19:31] 🧹 Formulario de empleado limpiado
+[11:19:37] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[11:19:37] 🏢 Empresa seleccionada: ID 3
+[11:19:37] 🏢 Empresa seleccionada: ID 3
+[11:19:37] 📍 Sede seleccionada: ID 4
+[11:19:37] 📍 Sede seleccionada: ID 4
+[11:19:37] 🧬 Huella digital cargada desde base de datos
+[11:19:37] 📄 Datos cargados para modificar empleado ID: 1350
+[11:19:43] 📥 Botón Registrar presionado
+[11:19:44] ⏸ Se decidió mantener el horario actual. El empleado fue actualizado sin modificar la asignación.
+[11:19:45] 🧹 Formulario de empleado limpiado
+[11:19:49] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[11:19:49] 🏢 Empresa seleccionada: ID 3
+[11:19:49] 🏢 Empresa seleccionada: ID 3
+[11:19:49] 📍 Sede seleccionada: ID 4
+[11:19:49] 📍 Sede seleccionada: ID 4
+[11:19:49] 🧬 Huella digital cargada desde base de datos
+[11:19:49] 📄 Datos cargados para modificar empleado ID: 1350
+[11:19:56] 📸 Intentando iniciar captura de huella
+[11:20:10] ✅ Huella capturada correctamente
+[11:20:16] 📥 Botón Registrar presionado
+[11:20:18] ⏸ Se decidió mantener el horario actual. El empleado fue actualizado sin modificar la asignación.
+[11:20:19] 🧹 Formulario de empleado limpiado
+[11:21:27] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[11:21:27] 🏢 Empresa seleccionada: ID 3
+[11:21:27] 🏢 Empresa seleccionada: ID 3
+[11:21:27] 📍 Sede seleccionada: ID 4
+[11:21:27] 📍 Sede seleccionada: ID 4
+[11:21:27] 🧬 Huella digital cargada desde base de datos
+[11:21:27] 📄 Datos cargados para modificar empleado ID: 1350
+[11:21:35] 📥 Botón Registrar presionado
+[11:26:42] ⏸ Se decidió mantener el horario actual. El empleado fue actualizado sin modificar la asignación.
+[11:26:43] 🧹 Formulario de empleado limpiado
+[11:26:49] ↩️ Usuario volvió a la pantalla principal desde RegistroEmpleado
+[11:29:05] 🔄 Abriendo formulario de Registro de Empleado
+[11:29:10] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[11:29:10] 🏢 Empresa seleccionada: ID 3
+[11:29:10] 🏢 Empresa seleccionada: ID 3
+[11:29:10] 📍 Sede seleccionada: ID 4
+[11:29:10] 📍 Sede seleccionada: ID 4
+[11:29:10] 🧬 Huella digital cargada desde base de datos
+[11:29:10] 📄 Datos cargados para modificar empleado ID: 1350
+[11:29:16] 📥 Botón Registrar presionado
+[11:35:06] 🕒 Horario genérico asignado.
+[11:35:07] 🧹 Formulario de empleado limpiado
+[11:35:08] ↩️ Usuario volvió a la pantalla principal desde RegistroEmpleado
+[11:35:24] 🔄 Abriendo formulario de Registro de Empleado
+[11:35:28] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[11:35:28] 🏢 Empresa seleccionada: ID 3
+[11:35:29] 🏢 Empresa seleccionada: ID 3
+[11:35:29] 📍 Sede seleccionada: ID 4
+[11:35:29] 📍 Sede seleccionada: ID 4
+[11:35:29] 🧬 Huella digital cargada desde base de datos
+[11:35:29] 📄 Datos cargados para modificar empleado ID: 1350
+[11:35:32] 📥 Botón Registrar presionado
+[11:35:39] ⏸ Se decidió mantener el horario actual. El empleado fue actualizado sin modificar la asignación.
+[11:35:41] 🧹 Formulario de empleado limpiado
+[11:46:21] 🔄 Abriendo formulario de Registro de Empleado
+[11:46:25] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[11:46:25] 🏢 Empresa seleccionada: ID 3
+[11:46:25] 🏢 Empresa seleccionada: ID 3
+[11:46:25] 📍 Sede seleccionada: ID 4
+[11:46:26] 📍 Sede seleccionada: ID 4
+[11:46:26] 🧬 Huella digital cargada desde base de datos
+[11:46:26] 📄 Datos cargados para modificar empleado ID: 1350
+[11:46:30] 📥 Botón Registrar presionado
+[11:46:36] ⏸ Se decidió mantener el horario actual. El empleado fue actualizado sin modificar la asignación.
+[11:47:11] 🧹 Formulario de empleado limpiado
+[11:48:52] ↩️ Usuario volvió a la pantalla principal desde RegistroEmpleado
+[11:50:44] 🔄 Abriendo formulario de Registro de Empleado
+[11:50:51] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[11:50:51] 🏢 Empresa seleccionada: ID 3
+[11:50:51] 🏢 Empresa seleccionada: ID 3
+[11:50:51] 📍 Sede seleccionada: ID 4
+[11:50:51] 📍 Sede seleccionada: ID 4
+[11:50:51] 🧬 Huella digital cargada desde base de datos
+[11:50:51] 📄 Datos cargados para modificar empleado ID: 1350
+[11:50:55] 📥 Botón Registrar presionado
+[11:50:56] ⏸ Se decidió mantener el horario actual. El empleado fue actualizado sin modificar la asignación.
+[11:50:58] 🧹 Formulario de empleado limpiado
+[11:52:10] ↩️ Usuario volvió a la pantalla principal desde RegistroEmpleado
+[22:05:33] 🚫 Acceso denegado a Configuración
+[22:05:46] 🔄 Abriendo formulario de Registro de Empleado
+[22:05:52] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[22:05:52] 🏢 Empresa seleccionada: ID 3
+[22:05:52] 🏢 Empresa seleccionada: ID 3
+[22:05:52] 📍 Sede seleccionada: ID 4
+[22:05:52] 📍 Sede seleccionada: ID 4
+[22:05:52] 🧬 Huella digital cargada desde base de datos
+[22:05:52] 📄 Datos cargados para modificar empleado ID: 1350
+[22:06:00] 📥 Botón Registrar presionado
+[22:06:03] ⏸ Se decidió mantener el horario actual. El empleado fue actualizado sin modificar la asignación.
+[22:06:04] 🧹 Formulario de empleado limpiado
+[22:06:09] ↩️ Usuario volvió a la pantalla principal desde RegistroEmpleado
+[22:06:41] 🔄 Abriendo formulario de Registro de Empleado
+[22:07:04] ↩️ Usuario volvió a la pantalla principal desde RegistroEmpleado
+[22:07:53] 🔐 Acceso autorizado a Configuración
+[22:07:53] ✔️ Sede actual cargada: UNICENTRO

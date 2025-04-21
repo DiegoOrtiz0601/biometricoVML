@@ -60,6 +60,8 @@
             </Style.Triggers>
         </Style>
 
+    
+
         <!-- 🌑 Sombra para bordes o modales -->
         <DropShadowEffect x:Key="DropShadow"
                           Color="Black"

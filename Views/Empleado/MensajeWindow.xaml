@@ -1,44 +1,68 @@
 ﻿<Window x:Class="BiomentricoHolding.Views.MensajeWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Mensaje"
-        Height="Auto" Width="400" MaxWidth="450" MaxHeight="250"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Background="#f8f9fa"
+        SizeToContent="WidthAndHeight"
+        Background="#FFF2F2F2"
         WindowStyle="None"
-        AllowsTransparency="True"
-        SizeToContent="Height">
+        AllowsTransparency="True">
 
-    <Border CornerRadius="12" Background="White" BorderBrush="#dee2e6" BorderThickness="1" Padding="20">
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+    <Border Background="White"
+            CornerRadius="12"
+            Padding="20"
+            Effect="{DynamicResource DropShadow}">
+        <Grid>
+            <!-- Botón de cierre (X) -->
+            <Button Content="❌"
+                    Width="30"
+                    Height="30"
+                    FontWeight="Bold"
+                    Background="Transparent"
+                    Foreground="#1c1c1c"
+                    BorderThickness="0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Cursor="Hand"
+                    Click="BtnCerrar_Click"
+                    ToolTip="Cerrar ventana"/>
 
-            <!-- Icono + Mensaje -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
-                <TextBlock x:Name="icono"
-                           Text="🔔"
-                           FontSize="32"
-                           Foreground="SteelBlue"
-                           VerticalAlignment="Center"
-                           Margin="0,0,10,0"/>
+            <StackPanel Margin="0,30,0,0">
+                <!-- Icono y mensaje -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBlock x:Name="icono"
+                               Text="🔔"
+                               FontSize="32"
+                               VerticalAlignment="Top"
+                               Margin="0,0,10,0"/>
+                    <TextBlock x:Name="txtMensaje"
+                               FontSize="16"
+                               Foreground="#1F2937"
+                               TextWrapping="Wrap"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
 
-                <TextBlock x:Name="txtMensaje"
-           Text="Aquí va el mensaje"
-           FontSize="16"
-           FontWeight="SemiBold"
-           TextAlignment="Left"
-           TextWrapping="Wrap"
-           Foreground="#212529"
-           Width="280"
-           MaxWidth="280"
-           VerticalAlignment="Center"/>
+                <!-- Botones -->
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Margin="0,20,0,0">
+                    <Button x:Name="btnCancelar"
+                            Content="Mantener"
+                            Width="100"
+                            Margin="0,0,10,0"
+                            Style="{StaticResource BotonRojo}"
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            Click="BtnCancelar_Click"/>
+                    <Button x:Name="btnOK"
+                            Content="Reemplazar"
+                            Width="100"
+                            Style="{StaticResource BotonRojo}"
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            Click="BtnOK_Click"/>
+                </StackPanel>
             </StackPanel>
-
-            <!-- Botones -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="btnOK" Content="✔ Aceptar" Width="120" Margin="10,0" Click="BtnOK_Click"/>
-                <Button x:Name="btnCancelar" Content="✖ Cancelar" Width="120" Margin="10,0" Click="BtnCancelar_Click"/>
-            </StackPanel>
-        </StackPanel>
+        </Grid>
     </Border>
 </Window>

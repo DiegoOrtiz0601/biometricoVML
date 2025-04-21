@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace BiomentricoHolding.Views
 {
@@ -12,6 +13,16 @@ namespace BiomentricoHolding.Views
             txtMensaje.Text = mensaje;
             btnCancelar.Visibility = mostrarCancelar ? Visibility.Visible : Visibility.Collapsed;
         }
+
+        // ✅ Nuevo constructor con texto personalizado para botones
+        public MensajeWindow(string mensaje, bool mostrarCancelar, string textoAceptar, string textoCancelar)
+        : this(mensaje, mostrarCancelar)
+        {
+            btnOK.Content = textoAceptar;
+            btnCancelar.Content = textoCancelar;
+            btnCancelar.Visibility = mostrarCancelar ? Visibility.Visible : Visibility.Collapsed;
+        }
+
 
         // Constructor con autocierre
         public MensajeWindow(string mensaje, int segundosAutocierre)
@@ -57,7 +68,6 @@ namespace BiomentricoHolding.Views
                 case "advertencia":
                     icono.Text = "⚠";
                     icono.Foreground = System.Windows.Media.Brushes.DarkOrange;
-
                     break;
                 case "error":
                     icono.Text = "❌";
@@ -91,6 +101,19 @@ namespace BiomentricoHolding.Views
         {
             Resultado = false;
             this.DialogResult = false;
+        }
+        private void BtnCerrar_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false; // Asegura que no se tome como confirmación
+            this.Close();
+        }
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            if (!this.DialogResult.HasValue)
+            {
+                this.DialogResult = false;
+            }
         }
     }
 }
