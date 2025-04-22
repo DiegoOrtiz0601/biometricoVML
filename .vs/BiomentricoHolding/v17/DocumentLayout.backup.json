@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Diego VML\\Documents\\Proyectos\\SistemaBiometricoWPF\\BiomentricoHolding\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{062F2259-EA59-4609-A11F-611517935927}|BiomentricoHolding.csproj|c:\\users\\diego vml\\documents\\proyectos\\sistemabiometricowpf\\biomentricoholding\\views\\empleado\\mensajewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{062F2259-EA59-4609-A11F-611517935927}|BiomentricoHolding.csproj|solutionrelative:views\\empleado\\mensajewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{062F2259-EA59-4609-A11F-611517935927}|BiomentricoHolding.csproj|c:\\users\\diego vml\\documents\\proyectos\\sistemabiometricowpf\\biomentricoholding\\views\\empleado\\registrarempleado.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{062F2259-EA59-4609-A11F-611517935927}|BiomentricoHolding.csproj|solutionrelative:views\\empleado\\registrarempleado.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{062F2259-EA59-4609-A11F-611517935927}|BiomentricoHolding.csproj|c:\\users\\diego vml\\documents\\proyectos\\sistemabiometricowpf\\biomentricoholding\\views\\empleado\\asignarhorariowindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{062F2259-EA59-4609-A11F-611517935927}|BiomentricoHolding.csproj|solutionrelative:views\\empleado\\asignarhorariowindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{062F2259-EA59-4609-A11F-611517935927}|BiomentricoHolding.csproj|c:\\users\\diego vml\\documents\\proyectos\\sistemabiometricowpf\\biomentricoholding\\views\\empleado\\mensajewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{062F2259-EA59-4609-A11F-611517935927}|BiomentricoHolding.csproj|solutionrelative:views\\empleado\\mensajewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{062F2259-EA59-4609-A11F-611517935927}|BiomentricoHolding.csproj|c:\\users\\diego vml\\documents\\proyectos\\sistemabiometricowpf\\biomentricoholding\\views\\empleado\\registrarempleado.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{062F2259-EA59-4609-A11F-611517935927}|BiomentricoHolding.csproj|solutionrelative:views\\empleado\\registrarempleado.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{062F2259-EA59-4609-A11F-611517935927}|BiomentricoHolding.csproj|c:\\users\\diego vml\\documents\\proyectos\\sistemabiometricowpf\\biomentricoholding\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -21,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{062F2259-EA59-4609-A11F-611517935927}|BiomentricoHolding.csproj|c:\\users\\diego vml\\documents\\proyectos\\sistemabiometricowpf\\biomentricoholding\\views\\empleado\\registrarempleado.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{062F2259-EA59-4609-A11F-611517935927}|BiomentricoHolding.csproj|solutionrelative:views\\empleado\\registrarempleado.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{062F2259-EA59-4609-A11F-611517935927}|BiomentricoHolding.csproj|c:\\users\\diego vml\\documents\\proyectos\\sistemabiometricowpf\\biomentricoholding\\views\\empleado\\asignarhorariowindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{062F2259-EA59-4609-A11F-611517935927}|BiomentricoHolding.csproj|solutionrelative:views\\empleado\\asignarhorariowindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{062F2259-EA59-4609-A11F-611517935927}|BiomentricoHolding.csproj|c:\\users\\diego vml\\documents\\proyectos\\sistemabiometricowpf\\biomentricoholding\\views\\empleado\\asignarhorariowindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -62,8 +58,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 3,
@@ -78,7 +78,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "AsignarHorarioWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\Diego VML\\Documents\\Proyectos\\SistemaBiometricoWPF\\BiomentricoHolding\\Views\\Empleado\\AsignarHorarioWindow.xaml.cs",
               "RelativeDocumentMoniker": "Views\\Empleado\\AsignarHorarioWindow.xaml.cs",
@@ -90,18 +90,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "AsignarHorarioWindow.xaml",
               "DocumentMoniker": "C:\\Users\\Diego VML\\Documents\\Proyectos\\SistemaBiometricoWPF\\BiomentricoHolding\\Views\\Empleado\\AsignarHorarioWindow.xaml",
               "RelativeDocumentMoniker": "Views\\Empleado\\AsignarHorarioWindow.xaml",
               "ToolTip": "C:\\Users\\Diego VML\\Documents\\Proyectos\\SistemaBiometricoWPF\\BiomentricoHolding\\Views\\Empleado\\AsignarHorarioWindow.xaml",
               "RelativeToolTip": "Views\\Empleado\\AsignarHorarioWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-15T04:48:19.339Z"
+              "WhenOpened": "2025-04-15T04:48:19.339Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "MensajeWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\Diego VML\\Documents\\Proyectos\\SistemaBiometricoWPF\\BiomentricoHolding\\Views\\Empleado\\MensajeWindow.xaml.cs",
               "RelativeDocumentMoniker": "Views\\Empleado\\MensajeWindow.xaml.cs",
@@ -115,26 +116,15 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MensajeWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\Diego VML\\Documents\\Proyectos\\SistemaBiometricoWPF\\BiomentricoHolding\\Views\\Empleado\\MensajeWindow.xaml",
-              "RelativeDocumentMoniker": "Views\\Empleado\\MensajeWindow.xaml",
-              "ToolTip": "C:\\Users\\Diego VML\\Documents\\Proyectos\\SistemaBiometricoWPF\\BiomentricoHolding\\Views\\Empleado\\MensajeWindow.xaml",
-              "RelativeToolTip": "Views\\Empleado\\MensajeWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-15T03:59:07.498Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "RegistrarEmpleado.xaml.cs",
               "DocumentMoniker": "C:\\Users\\Diego VML\\Documents\\Proyectos\\SistemaBiometricoWPF\\BiomentricoHolding\\Views\\Empleado\\RegistrarEmpleado.xaml.cs",
               "RelativeDocumentMoniker": "Views\\Empleado\\RegistrarEmpleado.xaml.cs",
               "ToolTip": "C:\\Users\\Diego VML\\Documents\\Proyectos\\SistemaBiometricoWPF\\BiomentricoHolding\\Views\\Empleado\\RegistrarEmpleado.xaml.cs",
               "RelativeToolTip": "Views\\Empleado\\RegistrarEmpleado.xaml.cs",
-              "ViewState": "AgIAAOYBAAAAAAAAAAAtwM0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAL0BAAAAAAAAAAAlwBECAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T16:08:25.645Z"
+              "WhenOpened": "2025-04-11T16:08:25.645Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -149,7 +139,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "CapturaHuellaService.cs",
               "DocumentMoniker": "C:\\Users\\Diego VML\\Documents\\Proyectos\\SistemaBiometricoWPF\\BiomentricoHolding\\Services\\CapturaHuellaService.cs",
               "RelativeDocumentMoniker": "Services\\CapturaHuellaService.cs",
@@ -161,7 +151,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\Diego VML\\Documents\\Proyectos\\SistemaBiometricoWPF\\BiomentricoHolding\\Views\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "Views\\MainWindow.xaml.cs",
@@ -173,7 +163,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 8,
               "Title": "CapturarHuellaWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\Diego VML\\Documents\\Proyectos\\SistemaBiometricoWPF\\BiomentricoHolding\\Views\\Empleado\\CapturarHuellaWindow.xaml.cs",
               "RelativeDocumentMoniker": "Views\\Empleado\\CapturarHuellaWindow.xaml.cs",
@@ -185,7 +175,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 9,
               "Title": "CapturarHuellaWindow.xaml",
               "DocumentMoniker": "C:\\Users\\Diego VML\\Documents\\Proyectos\\SistemaBiometricoWPF\\BiomentricoHolding\\Views\\Empleado\\CapturarHuellaWindow.xaml",
               "RelativeDocumentMoniker": "Views\\Empleado\\CapturarHuellaWindow.xaml",
@@ -196,7 +186,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 11,
               "Title": "ReportesView.xaml.cs",
               "DocumentMoniker": "C:\\Users\\Diego VML\\Documents\\Proyectos\\SistemaBiometricoWPF\\BiomentricoHolding\\Views\\Reportes\\ReportesView.xaml.cs",
               "RelativeDocumentMoniker": "Views\\Reportes\\ReportesView.xaml.cs",
@@ -208,7 +198,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 10,
               "Title": "ReportesView.xaml",
               "DocumentMoniker": "C:\\Users\\Diego VML\\Documents\\Proyectos\\SistemaBiometricoWPF\\BiomentricoHolding\\Views\\Reportes\\ReportesView.xaml",
               "RelativeDocumentMoniker": "Views\\Reportes\\ReportesView.xaml",

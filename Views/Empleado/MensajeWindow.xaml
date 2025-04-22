@@ -12,20 +12,8 @@
             CornerRadius="12"
             Padding="20"
             Effect="{DynamicResource DropShadow}">
-        <Grid>
-            <!-- Botón de cierre (X) -->
-            <Button Content="❌"
-                    Width="30"
-                    Height="30"
-                    FontWeight="Bold"
-                    Background="Transparent"
-                    Foreground="#1c1c1c"
-                    BorderThickness="0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    Cursor="Hand"
-                    Click="BtnCerrar_Click"
-                    ToolTip="Cerrar ventana"/>
+        <Grid>         
+         
 
             <StackPanel Margin="0,30,0,0">
                 <!-- Icono y mensaje -->

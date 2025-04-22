@@ -473,3 +473,27 @@
 [22:07:04] ↩️ Usuario volvió a la pantalla principal desde RegistroEmpleado
 [22:07:53] 🔐 Acceso autorizado a Configuración
 [22:07:53] ✔️ Sede actual cargada: UNICENTRO
+[08:10:02] 🔄 Abriendo formulario de Registro de Empleado
+[08:10:08] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[08:10:08] 🏢 Empresa seleccionada: ID 3
+[08:10:08] 🏢 Empresa seleccionada: ID 3
+[08:10:08] 📍 Sede seleccionada: ID 4
+[08:10:08] 📍 Sede seleccionada: ID 4
+[08:10:08] 🧬 Huella digital cargada desde base de datos
+[08:10:08] 📄 Datos cargados para modificar empleado ID: 1350
+[08:10:12] 📥 Botón Registrar presionado
+[08:10:14] ⏸ Se decidió mantener el horario actual. El empleado fue actualizado sin modificar la asignación.
+[08:10:16] 🧹 Formulario de empleado limpiado
+[08:12:11] 🔐 Acceso autorizado a Configuración
+[08:12:11] ✔️ Sede actual cargada: UNICENTRO
+[08:12:36] 🔄 Abriendo formulario de Registro de Empleado
+[08:12:43] ✏️ Usuario con cédula 80550594 desea modificar datos.
+[08:12:43] 🏢 Empresa seleccionada: ID 3
+[08:12:43] 🏢 Empresa seleccionada: ID 3
+[08:12:43] 📍 Sede seleccionada: ID 4
+[08:12:43] 📍 Sede seleccionada: ID 4
+[08:12:43] 🧬 Huella digital cargada desde base de datos
+[08:12:43] 📄 Datos cargados para modificar empleado ID: 1350
+[08:12:45] 📥 Botón Registrar presionado
+[08:12:47] ⏸ Se decidió mantener el horario actual. El empleado fue actualizado sin modificar la asignación.
+[08:12:51] 🧹 Formulario de empleado limpiado
